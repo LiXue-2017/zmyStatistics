@@ -1,0 +1,1 @@
+var HTTP_SERVERNAME = "http://test.zhumengyou.com";

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="css/icon-font.css" />
+</head>
+
+<body>
+  <!-- 登录页面 -->
+  <article>
+    <section class="main full">
+      <div class="bg-box full">
+        <img class="full" src="./assets/bg-log.png" alt="加载中...">
+      </div>
+      <div class="content">
+        <div class="log-box ilbk ct">
+          <h1 class="title">逐梦游-统计端</h1>
+          <p class="title2 fs24">Backstage management of sleepwalking</p>
+          <form action="post" class="user-infos">
+            <div class="input-box user-name mg0">
+              <i class="iconz icon-user"></i>
+              <input type="text" id="name" name="name" autofocus placeholder="账号名" />
+            </div>
+            <div class="input-box user-pass mg0">
+              <i class="iconz icon-pass"></i>
+              <input type="password" id="pass" name="pass" placeholder="密码" />
+              <i class="iconz icon-see icon-eye-off ilbk"></i>
+            </div>
+            <div class="remember mg0">
+              <div class="check-box ilbk">
+                <input type="checkbox" id="remember" name="remember" />
+              </div>
+              <label for="remember ilbk">
+                <span class="txt fs14">记住密码</span>
+              </label>
+            </div>
+            <div class="btn-box">
+              <input type="button" name="" id="btn-log" value="登录" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </article>
+</body>
+<script src="./js/config.js"></script>
+<script src="./js/jquery-2.x-git.min.js"></script>
+<script src="./js/jquery.cookie.min.js"></script>
+<script src="./js/util.js"></script>
+<script src="./js/common.js"></script>
+<script type="text/javascript">
+  $(function () {
+    // 读取账号和密码
+    var user = $.cookie('shelf_name');
+    var password = $.cookie('password');
+    if (user) {
+      $('#name').val(user);
+    }
+    if (password) {
+      $('#pass').val(password);
+      $('#remember').prop('checked', true);
+    }
+
+    // 密码是否可见
+    $('.user-infos .user-pass .icon-see').click(function () {
+      $(this).toggleClass('icon-eye icon-eye-off');
+      if ($(this).hasClass('icon-eye-off')) {
+        $('#pass').prop('type', 'password');
+      }
+      if ($(this).hasClass('icon-eye')) {
+        $('#pass').prop('type', 'text');
+      }
+    });
+
+    // 点击登录
+    $('#btn-log').click(function () {
+      if ($.trim($('#name').val()) == '') {
+        alert('请输入用户名！');
+        return false;
+      }
+      if ($.trim($('#pass').val()) == '') {
+        alert('请输入密码！');
+        return false;
+      }
+      var queryParam = $('.user-infos').serializeArray();
+      $.post(HTTP_SERVERNAME + '/worksystem/main.php', queryParam, function (data, status) {
+        if (data.code == 0) {
+          saveToLocal('user_name', $.trim($('#name').val()));
+          if (!$('#remember').is(':checked')) {
+            $.removeCookie('shelf_name');
+            $.removeCookie('password');
+          } else {
+            if (!$.cookie('shelf_name')) {
+              $.cookie('shelf_name', $.trim($('#name').val()), {
+                expires: 7
+              });
+            }
+            if (!$.cookie('password')) {
+              $.cookie('password', $.trim($('#pass').val()), {
+                expires: 7
+              });
+            }
+          }
+
+          var token = data.param.token;
+          saveToLocal('token', token);
+          // 统计端
+          if (data.param.power.indexOf('7') > -1) {
+            window.location.href = './statistics/account.html';
+          }
+        }
+        if (data.code == 400) {
+          alert(data.msg);
+          return false;
+        }
+      }, 'JSON');
+    });
+
+  });
+</script>
+
+</html>

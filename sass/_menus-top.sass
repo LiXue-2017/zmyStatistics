@@ -1,0 +1,77 @@
+.drag-box
+  flex: 0 0 60px
+  position: fixed
+  z-index: 120
+  top: 0
+  left: 0
+  width: 100%
+  height: 60px
+  line-height: 60px
+  padding-left: 60px
+  display: flex
+  justify-content: space-between
+  color: #fff
+  background: #3c3c3c
+  /* drag */
+  -webkit-app-region: drag
+  .title
+    flex: 1
+    font-size: 24px
+  .menus-top
+    flex: 6
+    .item
+      position: relative
+      height: 60px 
+      line-height: 60px
+      padding: 0 30px
+      -webkit-app-region: no-drag
+      .txt
+        color: #fff
+      &.current, &:hover
+        border-bottom: 4px solid rgba(229,152,253, 0.7)
+        transition: all 0.3s
+        .txt
+          color: #e598fd
+      .submenu
+        position: absolute
+        top: 62px
+        left: 0
+        width: 100%
+        .sub-item
+          position: relative
+          height: 40px
+          line-height: 40px
+          font-size: 16px
+          &.current
+            .sub-txt
+              background: #e598fd
+              color: #fff  
+          .sub-txt
+            position: absolute
+            z-index: 110
+            width: 100%
+            height: 100%
+            background: #514e4e
+            transition: all 0.3s
+            color: #fff
+            &:hover
+              background: #e598fd
+              color: #fff  
+  .user-name
+    flex: 1  
+  // .btns
+  //   display: flex
+  //   justify-content: space-between
+  //   align-items: center
+  //   margin-right: 10px
+  //   width: 100px
+  //   cursor: pointer
+  //   -webkit-app-region: no-drag
+  //   .btn
+  //     width: 30px
+  //     line-height: 30px
+  //     &:hover
+  //       background: #585454
+  //       transform: all 0.3s
+  //     &.icon-close:hover
+  //       background: #f35f5f

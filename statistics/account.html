@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../css/common.css" />
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/icon-font.css" />
+  <link rel="stylesheet" href="../css/dcalendar.picker.css" />
+  <link rel="stylesheet" href="../css/account.css" />
+</head>
+
+<body>
+  <!-- 数据统计 账号 -->
+  <article>
+    <section class="drag-box"></section>
+    <section class="main">
+      <section class="content">
+        <section class="chapter ">
+          <section class="time">
+            <span class="cap">查询时间：</span>
+            <div class="time-box ilbk ">
+              <input id="sDate" type="text" name="stime" /><span class="ilbk icon-to">~</span><input id="eDate"
+                type="text" name="etime" />
+            </div>
+            <div class="btn-box ">
+              <input class="btn" type="button" id="btn-search" value="搜索" />
+            </div>
+          </section>
+          <ul class="account-type">
+            <li class="type">
+              <h4 class="title">总账号</h4>
+              <p class="number">64124/个</p>
+              <div class="details">
+                <span class="sale">售出52472个</span>
+                <span class="recovery">售出52472个</span>
+                <span class="return">售出52472个</span>
+              </div>
+            </li>
+            <li class="type"></li>
+            <li class="type"></li>
+            <li class="type"></li>
+          </ul>
+        </section>
+        <section class="chapter time-statistics">
+          <div class="conditions clearfix">
+            <h4 class="title">时间统计</h4>
+            <div class="select-box fs16">
+              <div class="select-text">端游专区</div>
+              <ul class="select-ul gameType" data-selected="0">
+                <li data-value="0">端游专区</li>
+                <li data-value="1">手游专区</li>
+                <li data-value="2">页游专区</li>
+              </ul>
+              <i class="iconz icon-arrow-right cr2 fs20"></i>
+            </div>
+            <div class="select-box fs16 cr2">
+              <div class="select-text"></div>
+              <ul class="select-ul gameList" data-selected="" ></ul>
+              <i class="iconz icon-arrow-right cr2 fs20"></i>
+            </div>
+            <div class="account-type right">
+              dada
+            </div>
+          </div>
+          <div class="chart"></div>
+        </section>
+      </section>
+    </section>
+  </article>
+
+  <script type="text/html" id="gameRow">
+    <li data-value="{gameId}">{gameName}</li>
+  </script>
+
+  <script type="text/javascript" src="../js/jquery-2.x-git.min.js"></script>
+  <script type="text/javascript" src="../js/dcalendar.picker.js"></script>
+  <script type="text/javascript" src="../js/common.js"></script>
+  <script type="text/javascript" src="../js/util.js"></script>
+  <script type="text/javascript" src="../js/config.js"></script>
+  <script type="text/javascript" src="../js/api.js"></script>
+  <script type="text/javascript" src="../js/account.js"></script>
+</body>
+
+</html>

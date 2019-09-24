@@ -1,0 +1,55 @@
+@import './_mixin'
+
+article
+  display: flex
+  @import './_menus-top'
+  .main
+    flex: 1
+    margin-top: 62px
+    background: #f3f3f8
+    .content
+      height: 100%
+      background: #fff
+      margin: 17px 30px 40px
+      overflow-y: auto
+      display: flex
+      flex-direction: column
+      .chapter
+        flex: 1
+        padding: 22px 34px
+        .title
+          margin-bottom: 22px
+          color: #36bbb5
+          &::before
+            content: ''
+            display: inline-block
+            margin-right: 14px
+            vertical-align: -3px
+            height: 20px
+            border-left: 6px solid #36bbb5
+        .data    
+          display: flex
+          .typelist
+            flex: 0 0 412px
+            display: flex
+            flex-wrap: wrap
+            justify-content: space-around
+            padding: 52px 0 0 0
+            .type
+              flex: 0 0 160px
+              width: 160px
+              height: 99px
+              margin-bottom: 60px
+              border: bd1(#e8e5e9)
+              border-radius: 10px
+              padding-top: 22px
+              text-align: center
+              .cap
+                color: #333
+                font-size: 16px
+                margin-bottom: 18px
+              .number
+          .details
+            flex: 1
+
+

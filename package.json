@@ -1,0 +1,18 @@
+{
+  "name": "statistics",
+  "main": "index.html",
+  "window": {
+    "width": 1920,
+    "height": 1080,
+    "min_width": 1440,
+    "min_height": 900,
+    "position": "center",
+    "icon": "assets/logo.png",
+    "title": "逐梦游-统计端",
+    "toolbar": true
+  },
+  "version": "1.0.0",
+  "description": "逐梦游-统计端",
+  "author": "xueli",
+  "license": "ISC"
+}

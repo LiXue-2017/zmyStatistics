@@ -1,0 +1,118 @@
+@import './_mixin'
+
+article
+  display: flex
+  @import './_menus-top'
+  .main
+    flex: 1
+    margin-top: 62px
+    background: #f3f3f8
+    .content
+      height: 100%
+      background: #fff
+      margin: 17px 30px 40px
+      overflow-y: auto
+      display: flex
+      flex-direction: column
+      .chapter
+        flex: 1
+        padding: 22px 34px
+        .time
+          margin-bottom: 16px
+          display: flex
+          justify-content: flex-end
+          .cap
+            line-height: 34px
+          .time-box
+            @include time-box(228px, 34px)
+            margin-right: 18px
+          .btn-box
+            .btn
+              @include btnback(66px, 34px, 4px, 16px, #00bfb4)
+              &:hover
+                background: #09a299
+        .account-type        
+          display: flex
+          justify-content: space-between
+          .type
+            position: relative
+            flex: 0 0 340px
+            border-radius: 10px
+            opacity: 0.8
+            width: 340px
+            height: 190px
+            &:nth-child(1)
+              background: -moz-linear-gradient( 0deg, rgb(96,145,224) 0%, rgb(162,149,247) 100%)
+              background: -webkit-linear-gradient( 0deg, rgb(96,145,224) 0%, rgb(162,149,247) 100%)
+              background: -ms-linear-gradient( 0deg, rgb(96,145,224) 0%, rgb(162,149,247) 100%)
+              box-shadow: 0px 5px 15px 0px rgba(17, 104, 170, 0.75)
+              .title
+                border-bottom: bd1(rgba(86, 103, 162, 0.502))
+              &::after
+                width: 86px
+                height: 95px
+                background: url(../assets/bg-account1.png) no-repeat
+            &:nth-child(2)
+              background-image: -moz-linear-gradient( 0deg, rgb(80,170,203) 0%, rgb(75,191,177) 100%)
+              background-image: -webkit-linear-gradient( 0deg, rgb(80,170,203) 0%, rgb(75,191,177) 100%)
+              background-image: -ms-linear-gradient( 0deg, rgb(80,170,203) 0%, rgb(75,191,177) 100%)
+              box-shadow: 0px 5px 15px 0px rgba(46, 96, 207, 0.75)
+              .title
+                border-bottom: bd1(rgba(116, 188, 246, 0.502))
+              &::after
+                width: 81px
+                height: 75px
+                background: url(../assets/bg-account2.png) no-repeat  
+            &:nth-child(3)
+              background-image: -moz-linear-gradient( 0deg, rgb(235,120,143) 0%, rgb(252,174,140) 100%)
+              background-image: -webkit-linear-gradient( 0deg, rgb(235,120,143) 0%, rgb(252,174,140) 100%)
+              background-image: -ms-linear-gradient( 0deg, rgb(235,120,143) 0%, rgb(252,174,140) 100%)
+              box-shadow: 0px 5px 15px 0px rgba(116, 188, 246, 0.75)
+              .title
+                border-bottom: bd1(rgba(86, 103, 162, 0.502))
+              &::after
+                width: 93px
+                height: 83px
+                background: url(../assets/bg-account3.png) no-repeat 
+            &:nth-child(4)
+              background-image: -moz-linear-gradient( 0deg, rgb(88,160,227) 0%, rgb(86,187,220) 100%)
+              background-image: -webkit-linear-gradient( 0deg, rgb(88,160,227) 0%, rgb(86,187,220) 100%)
+              background-image: -ms-linear-gradient( 0deg, rgb(88,160,227) 0%, rgb(86,187,220) 100%)
+              box-shadow: 0px 3px 7px 0px rgba(212, 179, 252, 0.75)
+              .title
+                border-bottom: bd1(rgba(86, 103, 162, 0.502))
+              &::after
+                width: 96px
+                height: 62px
+                background: url(../assets/bg-account4.png) no-repeat 
+            &::after
+              display: block
+              content: ''
+              position: absolute
+              right: 10px
+              top: 8px
+              background-size: cover
+            .title
+              padding: 14px 0 10px 16px
+              color: #fff
+            .number
+              line-height: 110px
+              text-align: center
+              font-size: 32px
+              color: #fff
+            .details
+              display: flex
+              justify-content: space-around
+              padding-bottom: 22px
+              font-size: 14px
+              color: #fff
+        &.time-statistics
+          .conditions
+            .title
+              display: inline-block
+              vertical-align: middle
+              color: #2d92b3
+              font-size: 25px
+            .select-box
+              @include selectBox(136px, 30px, #acafb0, #3670ab, #4097a9)
+
