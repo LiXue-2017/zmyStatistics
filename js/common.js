@@ -39,6 +39,7 @@ function resetSelect(selectUlDom, selectTxt, dataSelected) {
 
 // 是否展开下拉列表
 function showSlectUlRight(selectBox, showBoxWidth, showBoxHeight, showBox, icon, speed) {
+  // 
   if (showBox.is(':visible')) {
     showBox.animate({
       left: '0px',
@@ -56,6 +57,7 @@ function showSlectUlRight(selectBox, showBoxWidth, showBoxHeight, showBox, icon,
     icon.removeClass('icon-arrow-right').addClass('icon-arrow-left');
   }
 }
+
 // 点击下拉框某项
 function liChangeStyle(liDom) {
   liDom.addClass('current').siblings().removeClass('current');
