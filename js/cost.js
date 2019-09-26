@@ -8,7 +8,7 @@ $(function () {
 
   // 加载公共顶侧菜单
   $('.drag-box').load('_menus-top.html', function () {
-    changeMenuCurrent($(this).find('.item.data-statistics'), '.account');
+    changeMenuCurrent($(this).find('.item.data-statistics'), '.cost');
     $('.drag-box .user-name').text(user + '，欢迎您~');
   });
 
@@ -33,30 +33,29 @@ $(function () {
     // 选择游戏
     if ($(this).parent().hasClass('gameList')) {
       $(this).parent().attr('data-selected', $(this).attr('data-value'));
-      getAccountData();
+      getData();
     }
   });
-
   // 点击选择账号状态
-  $('.content .time-statistics .account-status .status, .content .account-statistics .game-type .type').click(function () {
+  $('.content .cost-statistics .account-status .status').click(function () {
     $(this).addClass('current').siblings().removeClass('current');
     $(this).parent().attr('data-selected', $(this).attr('data-value'));
-    getAccountData();
+    getData();
   });
 
   // 获取游戏分类
   getGameList(token, gameDuan, $('.content .chapter .gameList'), false);
 
   // 获取 账号的数据统计
-  getAccountData();
+  getData();
 
   // 点击搜索
   $('.content .summary #btn-search').click(function () {
-    getAccountData();
+    getData();
   });
 
   // 初始化柱状图
-  var chartColumn = echarts.init($('.content .time-statistics .chart')[0]);
+  var chartColumn = echarts.init($('.content .cost-statistics .chart')[0]);
   var chartColumnOption = {
     color: {
       type: 'linear',
@@ -172,7 +171,7 @@ $(function () {
   };
 
   // 获取页面数据
-  function getAccountData() {
+  function getData() {
     var stime = $("#sDate").val();
     var etime = $("#eDate").val();
     // 专区
@@ -181,7 +180,7 @@ $(function () {
     // 账号状态
     var gameStatus = parseInt($('.content .time-statistics .account-status').attr('data-selected'));
     var params = {
-      a: 'data_account',
+      a: 'data_cost',
       token: token,
       fot_type: gameType,
       acc_type: gameStatus
@@ -268,4 +267,6 @@ $(function () {
       }
     }, 'json');
   }
+
+
 });

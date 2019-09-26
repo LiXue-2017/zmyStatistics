@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="pragma" content="no-cache" />
+  <meta http-equiv="Cache-control" content="no-cache">
+  <link rel="stylesheet" href="../css/common.css" />
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/icon-font.css" />
+  <link rel="stylesheet" href="../css/dcalendar.picker.css" />
+  <link rel="stylesheet" href="../css/sale.css" />
+</head>
+
+<body>
+  <!-- 数据统计 销售数据 -->
+  <article>
+    <section class="drag-box"></section>
+    <section class="main">
+      <section class="content">
+        <section class="chapter statistics">
+          <section class="head">
+            <h4 class="title">利润率/成本率统计</h4>
+            <!-- 游戏 -->
+            <section>
+              <span>游戏名字：</span>
+              <div class="select-box fs16 cr2">
+                <div class="select-text"></div>
+                <ul class="select-ul gameList" data-selected=""></ul>
+                <i class="iconz icon-arrow-down cr2 fs20"></i>
+              </div>
+            </section>
+            <section class="time">
+              <span class="cap">查询时间：</span>
+              <div class="time-box ilbk ">
+                <input id="sDate" type="text" name="stime" /><span class="ilbk icon-to">~</span><input id="eDate"
+                  type="text" name="etime" />
+              </div>
+            </section>
+            <section class="btn-box ">
+              <input class="btn" type="button" id="btn-search" value="搜索" />
+            </section>
+          </section>
+          <section class="chart"></section>
+        </section>
+        <section class="chapter ration">
+          <!-- 利润占比统计 -->
+          <div class="profit-ratio sub-item">
+            <h4 class="title">利润占比统计</h4>
+            <div class="chart"></div>
+          </div>
+          <!-- 销售数据列表 -->
+          <div class="list sub-item">
+            <h4 class="title">销售数据列表</h4>
+            <table class="data full">
+              <thead>
+                <tr>
+                  <th>售出时间</th>
+                  <th>售出价格</th>
+                  <th>回收价格</th>
+                  <th>利润率</th>
+                  <th>成本率</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </section>
+  </article>
+
+  <script type="text/html" id="gameRow">
+    <li data-value="{gameId}">{gameName}</li>
+  </script>
+  <script type="text/html" id="dataRow">
+    <tr>
+      <td>{saleTime}</td>
+      <td>{salePrice}</td>
+      <td>{recoveryPrice}</td>
+      <td>{profit}</td>
+      <td>{cost}</td>
+    </tr>
+  </script>
+
+  <script type="text/javascript" src="../js/jquery-2.x-git.min.js"></script>
+  <script type="text/javascript" src="../js/dcalendar.picker.js"></script>
+  <script type="text/javascript" src="../js/echarts.min.js"></script>
+  <script type="text/javascript" src="../js/common.js"></script>
+  <script type="text/javascript" src="../js/util.js"></script>
+  <script type="text/javascript" src="../js/config.js"></script>
+  <script type="text/javascript" src="../js/api.js"></script>
+  <script type="text/javascript" src="../js/sale.js"></script>
+</body>
+
+</html>

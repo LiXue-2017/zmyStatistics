@@ -11,12 +11,9 @@ article
       height: 100%
       background: #fff
       margin: 17px 30px 40px
-      overflow-y: auto
-      display: flex
-      flex-direction: column
       .chapter
-        flex: 1
         padding: 22px 34px
+        margin-bottom: 38px
         .time
           margin-bottom: 16px
           display: flex
@@ -31,7 +28,7 @@ article
               @include btnback(66px, 34px, 4px, 16px, #00bfb4)
               &:hover
                 background: #09a299
-        .account-type        
+        .account-type   
           display: flex
           justify-content: space-between
           .type
@@ -107,6 +104,7 @@ article
               font-size: 14px
               color: #fff
         &.time-statistics
+          border: 3px solid #f5f5f5
           .conditions
             .title
               display: inline-block
@@ -114,5 +112,94 @@ article
               color: #2d92b3
               font-size: 25px
             .select-box
-              @include selectBox(136px, 30px, #acafb0, #3670ab, #4097a9)
+              @include selectBox(136px, 30px, #acafb0, #29718c, #6bb7cc)
+            .account-status
+              .status
+                display: inline-block
+                padding: 0 12px 6px
+                font-size: 20px
+                color: #888
+                cursor: pointer
+                &:last-child
+                  margin-right: 0
+                &.current
+                  border-bottom: bd1(#2d92b3)
+                  color: #2d92b3
+          .chart        
+            width: 100%
+            height: 300px
+        &.account-statistics
+          display: flex
+          justify-content: space-between
+          .sub-item
+            border: 3px solid #f5f5f5
+            padding: 14px 1%
+            .title
+              display: inline-block
+              vertical-align: middle
+              margin-bottom: 16px
+              color: #2d92b3
+              font-size: 25px
+          .statistics
+            width: 55%
+            .game-type
+              .type
+                display: inline-block
+                padding: 0 12px 6px
+                font-size: 16px
+                color: #888
+                cursor: pointer
+                &:last-child
+                  margin-right: 0
+                &.current
+                  border-bottom: bd1(#2d92b3)
+                  color: #2d92b3
+            .data  
+              thead
+                font-size: 16px
+                color: rgb(15, 110, 141)
+                line-height: 1.2
+                border-top: bd1(#d5d7d7)
+                border-bottom: bd1(#d5d7d7)
+                line-height: 36px
+                th.ratio
+                  text-align: left                  
+              tbody
+                tr
+                  line-height: 34px
+                  font-size: 16px
+                  color: rgb(15, 110, 141)
+                  text-align: center
+                  border-bottom: bd1(#d5d7d7)
+                  td.ratio
+                    position: relative
+                    text-align: left
+                    width: 36%
+                    &:hover::before
+                      position: absolute
+                      top: 0
+                      left: 0
+                      content: ""
+                      width: 100%
+                      border-top: 1px solid #708090
+                    &:hover::after
+                      position: absolute
+                      top: 0
+                      left: 0
+                      content: ""
+                      width: 100%
+                      height: 100%
+                      background: rgba(112, 128, 144, 0.2)
+                    .ratio-box
+                      width: 0
+                      height: 13px
+                      border-radius: 0 6px 6px 0
+                      background: linear-gradient(0deg, #4399b8 0%, #4bbacb 100%)
+                      background: -webkit-linear-gradient(0deg, #4399b8 0%, #4bbacb 100%)
+          .account-ratio
+            width: 40%
+            .chart
+              width: 100%
+              height: 350px
+  
 

@@ -37,24 +37,66 @@ function resetSelect(selectUlDom, selectTxt, dataSelected) {
   });
 }
 
-// 是否展开下拉列表
-function showSlectUlRight(selectBox, showBoxWidth, showBoxHeight, showBox, icon, speed) {
-  // 
+// 往右展开下拉框
+function showSlectRight(selectBox, icon, speed) {
+  var showBox = selectBox.children('.select-ul');
+  var showBoxWidth = showBox.innerWidth();
+  // 下拉展开框可见时
   if (showBox.is(':visible')) {
     showBox.animate({
-      left: '0px',
-      display: 'none'
-    }, 200);
-    selectBox.removeClass('focus');
-    icon.removeClass('icon-arrow-left').addClass('icon-arrow-right');
-  } else {
+      opacity: '0',
+      left: '50%',
+    }, speed, function () {
+      $(this).css({
+        display: 'none',
+        left: '50%',
+      });
+      selectBox.removeClass('focus');
+      icon.removeClass('icon-arrow-left').addClass('icon-arrow-right');
+    });
+  } else { // 下拉展开框不可见时 ，让其可见
     showBox.animate({
-      left: showBoxWidth + 'px',
-      display: 'block',
-      marginTop: -(showBoxHeight/2) + 'px'
-    }, 200);
-    selectBox.addClass('focus');
-    icon.removeClass('icon-arrow-right').addClass('icon-arrow-left');
+      left: showBoxWidth + 4,
+      opacity: 1,
+    }, speed, function () {
+      showBox.css({
+        display: 'block',
+        left: showBoxWidth + 4,
+      });
+      selectBox.addClass('focus');
+      icon.removeClass('icon-arrow-right').addClass('icon-arrow-left');
+    });
+  }
+}
+
+// 往下展开下拉框
+function showSlectBottom(selectBox, icon, speed) {
+  var showBox = selectBox.children('.select-ul');
+  var showBoxHeight = showBox.innerHeight();
+  if (showBox.is(':visible')) {
+    showBox.animate({
+      opacity: 0,
+      bottom: '50%',
+    }, speed, function () {
+      $(this).css({
+        display: 'none',
+        bottom: '50%',
+      });
+      selectBox.removeClass('focus');
+      icon.removeClass('icon-arrow-down').addClass('icon-arrow-up');
+    });
+  } else { // 下拉展开框不可见时 ，让其可见
+    showBox.animate({
+      opacity: 1,
+      bottom: -(showBoxHeight + 4),
+    }, speed, function () {
+      showBox.css({
+        display: 'block',
+        bottom: -(showBoxHeight + 4),
+      });
+      selectBox.addClass('focus');
+      icon.removeClass('icon-arrow-up').addClass('icon-arrow-down');
+    });
   }
 }
 
@@ -66,4 +108,20 @@ function liChangeStyle(liDom) {
   if (liDom.parent().attr('data-event') == 'getPrice') {
     liDom.parent().attr('data-selected', liDom.text());
   }
+}
+
+// 检查token状态
+function checkToken(code) {
+  if (code == 1200) {
+    alert('登录已过期，请重新登录！');
+    window.location.href = '../index.html';
+    return;
+  }
+}
+
+// 设置下拉框选中某项
+function liSelected(liDom) {
+  liDom.addClass('current').siblings().removeClass('current');
+  liDom.parent().siblings('.select-text').text(liDom.text());
+  liDom.parent().attr('data-selected', liDom.attr('data-value'));
 }

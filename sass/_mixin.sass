@@ -160,10 +160,11 @@ $cr1: #fff
     height: $height
     display: inline-block
     vertical-align: middle
+    cursor: pointer
     .select-text
       position: absolute
-      z-index: 20
-      background: transparent
+      z-index: 10
+      background: #fff
       top: 0
       left: 0
       width: 100%
@@ -176,8 +177,65 @@ $cr1: #fff
       display: none
       position: absolute
       z-index: 100
-      left: 0
       top: 50%
+      left: 50%
+      width: 100%
+      transform: translateY(-50%)
+      border: bd1($color_bd)
+      border-radius: 5px
+      background: $cr1
+      max-height: 506px
+      overflow-y: auto
+      li
+        height: $height
+        line-height: $height
+        padding-left: 10px
+        transition: all 0.3s
+        &:hover
+          background: $color_hover
+          color: $cr1                      
+        &.current
+          background: $color_selected
+          color: $cr1
+    .iconz
+      position: absolute
+      z-index: 20
+      right: 3px
+      top: 50%
+      margin-top: -10px
+    &.focus
+      .select-text
+        border: bd1($color_selected)
+        color: $color_selected
+      .iconz
+        color: $color_selected
+
+@mixin selectBoxBtm($width, $height, $color_bd, $color_selected, $color_hover)
+  &
+    width: $width
+    position: relative
+    height: $height
+    display: inline-block
+    vertical-align: middle
+    cursor: pointer
+    .select-text
+      position: absolute
+      z-index: 10
+      background: #fff
+      top: 0
+      left: 0
+      width: 100%
+      padding: 0 20px 0 10px
+      height: 100%
+      line-height: $height
+      border: bd1(rgb(229, 229, 229))
+      border-radius: 5px
+    .select-ul
+      display: none
+      position: absolute
+      z-index: 100
+      bottom: 50%
+      left: 0
       width: 100%
       border: bd1($color_bd)
       border-radius: 5px
@@ -197,12 +255,13 @@ $cr1: #fff
           color: $cr1
     .iconz
       position: absolute
-      z-index: 10
+      z-index: 20
       right: 3px
       top: 50%
       margin-top: -10px
     &.focus
       .select-text
         border: bd1($color_selected)
+        color: $color_selected
       .iconz
         color: $color_selected
