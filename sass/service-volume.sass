@@ -1,0 +1,46 @@
+@import './_mixin'
+
+article
+  display: flex
+  @import './_menus-top'
+  .main
+    flex: 1
+    margin-top: 62px
+    background: #f3f3f8
+    padding: 18px 34px
+    .head
+      margin-bottom: 28px
+      .service
+        margin-right: 52px
+        .select-box
+          width: 136px
+          @include selectBoxBtm(160px, 34px, #acafb0, #29718c, #6bb7cc)
+      .time
+        display: flex
+        justify-content: flex-end
+        margin-right: 20px
+        .cap
+          line-height: 34px
+        .time-box
+          @include time-box(228px, 34px, #00bfb4)
+          margin-right: 18px
+      .btn-box
+        flex: 0 0 66px
+        .btn
+          @include btnback(66px, 34px, 4px, 16px, #00bfb4)
+          &:hover
+            background: #09a299
+    .statistics
+      width: 100%
+      display: flex
+      justify-content: space-between
+      flex-wrap: wrap
+      .chart
+        border: bd1(#dfdfdf)
+        border-top: 3px solid rgb(0, 191, 180)
+        height: 400px
+        margin-bottom: 16px
+        &.pie
+          width: 44%
+        &.bar, &.line
+          width: 54%

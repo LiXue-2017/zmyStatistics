@@ -132,7 +132,7 @@ $(function () {
     series: [{
       name: '账号占比',
       type: 'pie',
-      radius: ['36%', '60%'],
+      radius: ['0', '60%'],
       avoidLabelOverlap: false,
       label: {
         normal: {
@@ -204,11 +204,20 @@ $(function () {
           });
           chartLine.setOption(chartLineOption);
         }
-        // 时间统计
+        // 利润占比统计
         if (dataPie) {
-          chartPieOption.series[0].data.push(dataPie.lr);
-          chartPieOption.series[0].data.push(dataPie.cb);
-          chartPieOption.series[0].data.push(dataPie.cs);
+          chartPieOption.series[0].data.push({
+            name: '利润',
+            value: dataPie.lr
+          });
+          chartPieOption.series[0].data.push({
+            name: '成本',
+            value: dataPie.cb
+          });
+          chartPieOption.series[0].data.push({
+            name: '出售',
+            value: dataPie.cs
+          });
           // dataPie.forEach(item => {
           //   // chartPieOption.legend.data.push(item.);
            

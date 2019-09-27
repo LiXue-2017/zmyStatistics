@@ -1,0 +1,229 @@
+@import './_mixin'
+
+article
+  display: flex
+  @import './_menus-top'
+  .main
+    flex: 1
+    margin-top: 62px
+    background: #f3f3f8
+    padding: 18px 3%
+    .head
+      margin-bottom: 28px
+      .service
+        margin-right: 52px
+        .select-box
+          width: 136px
+          @include selectBoxBtm(160px, 34px, #acafb0, #29718c, #6bb7cc)
+      .time
+        display: flex
+        justify-content: flex-end
+        margin-right: 20px
+        .cap
+          line-height: 34px
+        .time-box
+          @include time-box(228px, 34px, #00bfb4)
+          margin-right: 18px
+      .btn-box
+        flex: 0 0 66px
+        .btn
+          @include btnback(66px, 34px, 4px, 16px, #00bfb4)
+          &:hover
+            background: #09a299
+    .game-area
+      width: 100%
+      display: flex
+      justify-content: space-between
+      margin-bottom: 80px
+      .area
+        border-radius: 10px
+        flex: 0 0 20%
+        height: 177px
+        box-shadow: 0px 0px 17px 0px rgba(181, 151, 236, 0.46)
+        padding: 0 26px
+        display: flex
+        justify-content: space-between
+        align-items: center
+        position: relative
+        overflow: hidden
+        transition: all 0.5s
+        &::after, &::before
+          content: ''
+          display: block
+          position: absolute
+          z-index: 10
+          border-radius: 50%
+        &::before
+          z-index: 20
+        &:hover
+          transform: scale(1.2)
+          &::after
+            transform: translate(-50%, -10%) 
+        .details
+          color: #fff
+          z-index: 30
+          text-align: center
+          .number
+            margin-bottom: 26px
+            font-size: 36px
+          .title
+            font-size: 24px 
+        &:nth-child(1)
+          background-image: -moz-linear-gradient( 0deg, rgb(0,223,254) 0%, rgb(1,190,250) 56%, rgb(2,156,245) 100%)
+          background-image: -webkit-linear-gradient( 0deg, rgb(0,223,254) 0%, rgb(1,190,250) 56%, rgb(2,156,245) 100%)
+          background-image: -ms-linear-gradient( 0deg, rgb(0,223,254) 0%, rgb(1,190,250) 56%, rgb(2,156,245) 100%)
+          &::after
+            bottom: 32px
+            right: -28px
+            width: 265px
+            height: 266px
+            background-color: rgba(131, 209, 255, 0.302)
+          img
+            width: 78px
+            height: 73px
+        &:nth-child(2)
+          background-image: -moz-linear-gradient( 0deg, rgb(183,160,249) 0%, rgb(154,133,252) 56%, rgb(124,105,255) 100%)
+          background-image: -webkit-linear-gradient( 0deg, rgb(183,160,249) 0%, rgb(154,133,252) 56%, rgb(124,105,255) 100%)
+          background-image: -ms-linear-gradient( 0deg, rgb(183,160,249) 0%, rgb(154,133,252) 56%, rgb(124,105,255) 100%)
+          &::after
+            bottom: 22px
+            right: -52px
+            background-image: -moz-linear-gradient( 90deg, rgb(125,103,255) 1%, rgb(0,255,174) 100%)
+            background-image: -webkit-linear-gradient( 90deg, rgb(125,103,255) 1%, rgb(0,255,174) 100%)
+            background-image: -ms-linear-gradient( 90deg, rgb(125,103,255) 1%, rgb(0,255,174) 100%)
+            opacity: 0.302
+            width: 265px
+            height: 265px
+          &::before
+            bottom: -44px
+            right: -52px
+            background-image: -moz-linear-gradient( 90deg, rgb(125,103,255) 1%, rgb(0,255,174) 100%)
+            background-image: -webkit-linear-gradient( 90deg, rgb(125,103,255) 1%, rgb(0,255,174) 100%)
+            background-image: -ms-linear-gradient( 90deg, rgb(125,103,255) 1%, rgb(0,255,174) 100%)
+            opacity: 0.4
+            width: 144px
+            height: 145px
+          img
+            width: 59px
+            height: 94px
+        &:nth-child(3)
+          background-image: -moz-linear-gradient( 0deg, rgb(255,138,133) 0%, rgb(255,117,134) 56%, rgb(255,96,134) 100%)
+          background-image: -webkit-linear-gradient( 0deg, rgb(255,138,133) 0%, rgb(255,117,134) 56%, rgb(255,96,134) 100%)
+          background-image: -ms-linear-gradient( 0deg, rgb(255,138,133) 0%, rgb(255,117,134) 56%, rgb(255,96,134) 100%)
+          &::after
+            bottom: 32px
+            right: -52px
+            background-image: -moz-linear-gradient( 90deg, rgb(255,227,108) 0%, rgb(255,116,134) 100%)
+            background-image: -webkit-linear-gradient( 90deg, rgb(255,227,108) 0%, rgb(255,116,134) 100%)
+            background-image: -ms-linear-gradient( 90deg, rgb(255,227,108) 0%, rgb(255,116,134) 100%)
+            opacity: 0.302
+            width: 265px
+            height: 265px
+          img
+            width: 94px
+            height: 91px
+        &:nth-child(4)
+          background-image: -moz-linear-gradient( 0deg, rgb(91,160,248) 0%, rgb(70,64,255) 100%)
+          background-image: -webkit-linear-gradient( 0deg, rgb(91,160,248) 0%, rgb(70,64,255) 100%)
+          background-image: -ms-linear-gradient( 0deg, rgb(91,160,248) 0%, rgb(70,64,255) 100%)
+          &::after
+            bottom: 18px
+            right: -36px
+            background-image: -moz-linear-gradient( 90deg, rgb(72,169,224) 0%, rgb(125,229,255) 100%)
+            background-image: -webkit-linear-gradient( 90deg, rgb(72,169,224) 0%, rgb(125,229,255) 100%)
+            background-image: -ms-linear-gradient( 90deg, rgb(72,169,224) 0%, rgb(125,229,255) 100%)
+            opacity: 0.302
+            width: 265px
+            height: 265px
+          &::before
+            bottom: -44px
+            right: -52px
+            background-image: -moz-linear-gradient( 90deg, rgb(72,169,224) 0%, rgb(125,229,255) 100%)
+            background-image: -webkit-linear-gradient( 90deg, rgb(72,169,224) 0%, rgb(125,229,255) 100%)
+            background-image: -ms-linear-gradient( 90deg, rgb(72,169,224) 0%, rgb(125,229,255) 100%)
+            opacity: 0.4
+            width: 144px
+            height: 145px
+          img
+            width: 95px
+            height: 65px
+    .volume   
+      display: flex
+      justify-content: space-between
+      .statistics
+        flex: 0 0 78%
+        .search
+          margin-right: 180px
+          text-align: right
+          .select-box
+            text-align: center
+            @include selectBoxBtm(160px, 40px, #acafb0, #29718c, #6bb7cc)
+        .chart 
+          width: 100%
+          height: 400px
+      .rank-list
+        width: 350px
+        .title
+          font-size: 20px
+          color: rgb(10, 156, 245)
+          padding-bottom: 22px
+          border-bottom: 2px solid #f1f1f1
+        .list 
+          .item
+            padding: 0 20px
+            height: 50px
+            border-bottom: 2px solid #f1f1f1
+            line-height: 50px
+            &:nth-child(1)
+              .rank::after
+                background-image: -moz-linear-gradient( 90deg, rgb(255,206,14) 0%, rgb(255,219,66) 56%, rgb(254,232,117) 100%)
+                background-image: -webkit-linear-gradient( 90deg, rgb(255,206,14) 0%, rgb(255,219,66) 56%, rgb(254,232,117) 100%)
+                background-image: -ms-linear-gradient( 90deg, rgb(255,206,14) 0%, rgb(255,219,66) 56%, rgb(254,232,117) 100%)
+                box-shadow: 0px 1px 2px 0px rgba(188, 68, 2, 0.71)
+            .rank
+              margin-right: 32px
+              text-shadow: 0px 1px 2px rgba(188, 68, 2, 0.71)
+              width: 26px
+              height: 26px
+              @include after(20)
+              @include before(10)
+              .txt
+                position: absolute
+                top: 50%
+                left: 50%
+                z-index: 30
+                font-size: 14px
+                color: rgb(255, 255, 255)
+              &::after
+                top: 50%
+                left: 50%
+                margin-left: -13px
+                margin-top: -13px
+                width: 26px
+                height: 26px
+                border-radius: 50%  
+              &::before
+                background-image: -moz-linear-gradient( 90deg, rgb(255,89,92) 0%, rgb(255,134,135) 30%, rgb(255,178,178) 48%, rgb(255,128,129) 71%, rgb(255,77,80) 26px)
+                background-image: -webkit-linear-gradient( 90deg, rgb(255,89,92) 0%, rgb(255,134,135) 30%, rgb(255,178,178) 48%, rgb(255,128,129) 71%, rgb(255,77,80) 100%)
+                background-image: -ms-linear-gradient( 90deg, rgb(255,89,92) 0%, rgb(255,134,135) 30%, rgb(255,178,178) 48%, rgb(255,128,129) 71%, rgb(255,77,80) 100%)
+                left: 50%
+                margin-left: -13px
+                top: 10px
+                width: 26px
+                height: 13px
+            .game-name
+              margin-right: 152px
+              font-size: 16px
+              color: rgb(51, 51, 51)
+            .number
+              font-size: 16px
+              color: rgb(51, 51, 51)
+
+
+                
+
+
+
+
+
+

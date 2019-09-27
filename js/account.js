@@ -1,7 +1,5 @@
 $(function () {
-  const gameDuan = 0, // 端游
-    gameHand = 1, // 手游
-    gamePage = 2; // 页游
+  const gameDuan = 0; // 端游
 
   var token = loadFromLocal('token', 'error');
   var user = loadFromLocal('user_name', 'error');

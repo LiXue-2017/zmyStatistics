@@ -12,11 +12,7 @@ function getGameList(token, typeInt, listDom, hasAll) {
     if (code == 0) {
       var list = data.param;
       if (list && list.length > 0) {
-        if (hasAll) {
-          var htmlStr = '<li class="current" data-value="0">全部</li>';
-        } else {
-          var htmlStr = '';
-        }
+        var htmlStr = hasAll == true ? '<li class="current" data-value="0">全部</li>' : '';
         list.forEach(function (val, index) {
           htmlStr += getTemplate('#gameRow', {
             gameId: val.yx_id,
@@ -25,7 +21,8 @@ function getGameList(token, typeInt, listDom, hasAll) {
         });
         listDom.html(htmlStr);
         // 默认选中第一个
-        liSelected($('.content .gameList li').first());
+        liSelected(listDom.children('li').first());
+        
       } else {
         resetSelect(listDom, '', '');
         listDom.empty();
@@ -62,4 +59,28 @@ function getGames(token, listDom, hasAll) {
       alert(data.msg);
     }
   }, "JSON");
+}
+
+// 获取交易客服
+function getDealkF(token, listDom, hasAll) {
+  var params = {
+    a: 'get_jyry',
+    token: token
+  }
+  $.post(HTTP_SERVERNAME + '/worksystem/gmaccount.php', params, function (data, status) {
+    var code = data.code;
+    if (code == 0) {
+      var kfList = data.param;
+      if (kfList) {
+        var htmlStr = hasAll == true ? '<li class="current" data-value="0">全部</li>' : '';
+        kfList.forEach(function (val, index) {
+          htmlStr += getTemplate('#kfRow', {
+            kfId: val.user_id,
+            kfName: val.username
+          });
+        });
+        listDom.html(htmlStr);
+      }
+    }
+  }, 'json');
 }

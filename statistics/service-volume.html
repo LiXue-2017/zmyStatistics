@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="pragma" content="no-cache" />
+  <meta http-equiv="Cache-control" content="no-cache">
+  <link rel="stylesheet" href="../css/common.css" />
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/icon-font.css" />
+  <link rel="stylesheet" href="../css/dcalendar.picker.css" />
+  <link rel="stylesheet" href="../css/service-volume.css" />
+</head>
+
+<body>
+  <!-- 数据统计 销售数据 -->
+  <article>
+    <header class="drag-box"></header>
+    <section class="main">
+      <section class="head clearfix right">
+        <!-- 交易客服 -->
+        <div class="service left">
+          <span>交易客服：</span>
+          <div class="select-box fs16 cr2">
+            <div class="select-text">全部</div>
+            <ul class="select-ul kfList" data-selected="0"></ul>
+            <i class="iconz icon-arrow-down cr2 fs20"></i>
+          </div>
+        </div>
+        <div class="time left">
+          <span class="cap">查询时间：</span>
+          <div class="time-box ilbk ">
+            <input id="sDate" type="text" name="stime" /><span class="ilbk icon-to">~</span><input id="eDate"
+              type="text" name="etime" />
+          </div>
+        </div>
+        <section class="btn-box left">
+          <input class="btn" type="button" id="btn-search" value="搜索" />
+        </section>
+      </section>
+      <section class="statistics">
+        <section class="chart pie profit-price"></section>
+        <section class="chart bar person-volume"></section>
+        <section class="chart pie game-type"></section>
+        <section class="chart line profit"></section>
+      </section>
+    </section>    
+  </article>
+
+  <script type="text/html" id="kfRow">
+    <li data-value="{kfId}">{kfName}</li>
+  </script>
+
+  <script type="text/javascript" src="../js/jquery-2.x-git.min.js"></script>
+  <script type="text/javascript" src="../js/dcalendar.picker.js"></script>
+  <script type="text/javascript" src="../js/echarts.min.js"></script>
+  <script type="text/javascript" src="../js/common.js"></script>
+  <script type="text/javascript" src="../js/util.js"></script>
+  <script type="text/javascript" src="../js/config.js"></script>
+  <script type="text/javascript" src="../js/api.js"></script>
+  <script type="text/javascript" src="../js/service-volume.js"></script>
+</body>
+
+</html>

@@ -4,109 +4,25 @@ $cr1: #fff
 @function bd1($color) 
   @return 1px solid $color
 
-@mixin mask-wrapper($color: rgba(63, 63, 63, 0.9))
+@mixin after($zindex)
   &
-    position: fixed
-    z-index: 200
-    top: 0
-    left: 0
-    bottom: 0
-    right: 0
-    background: $color
-    .mask-content
-      position: fixed
-      z-index: 210
-      height: auto
-      left: 50%
-      top: 50%
-      transform: translate(-50%, -50%)
-      webkit-transform: translate(-50%, -50%)
-      background: #fff
-      border-radius: 30px
+    position: relative
+    &::after
+      content: ''
+      display: inline-block
+      position: absolute
+      z-index: $zindex
 
-@mixin mask-ul
-  .item
-    font-size: 0
-    margin-bottom: 40px
-    // &:last-child
-    //   margin-bottom: 0
-    .cap
-      width: 200px
-      vertical-align: top
-      text-align: right
-      margin-right: 20px
-      color: #f65151
-      font-size: 24px
-      font-weight: 400
-    .select-box
-      vertical-align: top
-      width: 260px
-      position: relative
-      height: 36px
-      .select-text
-        position: absolute
-        z-index: 20
-        background: transparent
-        top: 0
-        left: 0
-        width: 100%
-        padding: 0 20px 0 10px
-        height: 100%
-        line-height: 36px
-        border: bd1(rgb(229, 229, 229))
-        border-radius: 5px
-      .select-ul
-        display: none
-        position: absolute
-        z-index: 100
-        top: 40px
-        left: -1px
-        width: 100%
-        border: bd1(#D4D4D4)
-        border-radius: 5px
-        background: $cr1
-        max-height: 506px
-        overflow-y: auto
-        li
-          height: 36px
-          line-height: 36px
-          padding-left: 10px
-          transition: all 0.3s
-          &:hover
-            background: #e598fd
-            color: $cr1                      
-          &.current
-            background: #b87fca
-            color: $cr1
-      .iconz
-        position: absolute
-        z-index: 10
-        right: 3px
-        top: 50%
-        margin-top: -10px
-      &.focus
-        .select-text
-          border: bd1(#b87fca)
-        .iconz
-          color: #b87fca  
-    .input-box
-      vertical-align: top
-      width: 260px
-      input
-        width: 100%
-        height: 36px
-        border: 1px solid #e5e5e5
-        border-radius: 5px
-        padding-left: 8px
-        &:focus
-          border: bd1(#b87fca)
-    .time-box
-      @include time-box(260px)
-    &.btn-box
-      .btn
-        margin-right: 26px
-        &:last-child
-          margin-right: 0
+@mixin before($zindex)
+  &
+    position: relative
+    &::before
+      content: ''
+      display: inline-block
+      position: absolute
+      z-index: $zindex
+
+        
 
 @mixin btn($width, $height, $radius, $fs, $color)
   &
@@ -132,7 +48,7 @@ $cr1: #fff
     font-size: $fs
     cursor: pointer
 
-@mixin time-box($width, $inputHeight)
+@mixin time-box($width, $inputHeight, $color)
   &
     width: $width
     position: relative
@@ -147,7 +63,7 @@ $cr1: #fff
       font-size: 14px
       color: #999
       &:focus
-        border: bd1(#e598fd)
+        border: bd1($color)
     .icon-to 
       line-height: $inputHeight
       padding: 0 4px
@@ -229,7 +145,7 @@ $cr1: #fff
       height: 100%
       line-height: $height
       border: bd1(rgb(229, 229, 229))
-      border-radius: 5px
+      border-radius: 10px
     .select-ul
       display: none
       position: absolute
@@ -238,7 +154,7 @@ $cr1: #fff
       left: 0
       width: 100%
       border: bd1($color_bd)
-      border-radius: 5px
+      border-radius: 10px
       background: $cr1
       max-height: 506px
       overflow-y: auto
