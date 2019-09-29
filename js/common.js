@@ -83,7 +83,7 @@ function showSlectBottom(selectBox, icon, speed) {
         bottom: '50%',
       });
       selectBox.removeClass('focus');
-      icon.removeClass('icon-arrow-down').addClass('icon-arrow-up');
+      icon.removeClass('icon-arrow-up').addClass('icon-arrow-down');
     });
   } else { // 下拉展开框不可见时 ，让其可见
     showBox.animate({
@@ -95,7 +95,7 @@ function showSlectBottom(selectBox, icon, speed) {
         bottom: -(showBoxHeight + 4),
       });
       selectBox.addClass('focus');
-      icon.removeClass('icon-arrow-up').addClass('icon-arrow-down');
+      icon.removeClass('icon-arrow-down').addClass('icon-arrow-up');
     });
   }
 }
@@ -124,4 +124,9 @@ function liSelected(liDom) {
   liDom.addClass('current').siblings().removeClass('current');
   liDom.parent().siblings('.select-text').text(liDom.text());
   liDom.parent().attr('data-selected', liDom.attr('data-value'));
+}
+
+// 显示共多少数据
+function showRecordsNum(el, num) {
+  el.text(num);
 }

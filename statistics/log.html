@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="pragma" content="no-cache" />
+  <meta http-equiv="Cache-control" content="no-cache">
+  <link rel="stylesheet" href="../css/common.css" />
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/icon-font.css" />
+  <link rel="stylesheet" href="../css/dcalendar.picker.css" />
+  <link rel="stylesheet" href="../css/log.css" />
+</head>
+
+<body>
+  <!-- 客服日志 -->
+  <article>
+    <section class="drag-box"></section>
+    <section class="main">
+      <section class="content">
+        <form class="infos">
+          <h4 class="cr9 fs22 cap">客服日志</h4>
+          <ul class="search-list">
+            <!-- 操作时间 -->
+            <li class="item">
+              <h5 class="title">操作时间：</h5>
+              <div class="time-box">
+                <input id="sDate" type="text" name="stime" /><span class="ilbk icon-to">~</span><input id="eDate"
+                  type="text" name="etime" />
+              </div>
+            </li>
+            <!-- 操作客服 -->
+            <li class="item">
+              <h5 class="title">操作客服：</h5>
+              <div class="select-box fs16 cr2">
+                <div class="select-text">全部</div>
+                <ul class="select-ul kfList" data-selected="0"></ul>
+                <i class="iconz icon-arrow-down cr2 fs20"></i>
+              </div>
+            </li>
+            <!-- 商品编号 -->
+            <li class="item">
+              <h5 class="title">
+                <label for="operator">商品编号：</label>
+              </h5>
+              <div class="txt-box">
+                <input type="number" class="fs16 cr2" id="good-id" />
+              </div>
+            </li>
+            <!-- 日志类型 -->
+            <li class="item">
+              <h5 class="title">日志类型：</h5>
+              <div class="select-box fs16 cr2">
+                <div class="select-text">全部</div>
+                <ul class="select-ul logType" data-selected="全部"></ul>
+                <i class="iconz icon-arrow-down cr2 fs20"></i>
+              </div>
+            </li>
+            <!-- 商品状态 -->
+            <li class="item">
+              <h5 class="title">商品状态：</h5>
+              <div class="select-box fs16 cr2">
+                <div class="select-text">全部</div>
+                <ul class="select-ul goodStatus" data-selected="全部"></ul>
+                <i class="iconz icon-arrow-down cr2 fs20"></i>
+              </div>
+            </li>
+            <!-- 游戏账号 -->
+            <li class="item">
+              <h5 class="title">
+                <label for="game-account">游戏账号：</label>
+              </h5>
+              <div class="txt-box">
+                <input type="text" class="fs16 cr2" id="game-account" />
+              </div>
+            </li>
+          </ul>
+          <div class="btn-box ct">
+            <input class="fs18 bg1" type="button" id="btn-search" value="搜索" />
+          </div>
+          <div class="num-box fs18">共支出<span class="cr4 number money">0</span>元</div>
+          <div class="refresh-box ">
+            <i class="iconz icon-refresh ilbk fs22"></i>
+          </div>
+        </form>
+        <table class="records full cr5">
+          <thead class="fs16">
+            <tr>
+              <th>客服Id</th>
+              <th>商品编号</th>
+              <th>日志类型</th>
+              <th>操作状态</th>
+              <th>游戏账号</th>
+              <th>IP地址</th>
+              <th>操作时间</th>
+              <th>操作内容</th>
+            </tr>
+          </thead>
+          <tbody class="fs14 ct bg1"></tbody>
+          <tfoot class="fs16 cr6 bg1 ct">
+            <tr>
+              <td class="pageWrapper" colspan="8">
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </section>
+    </section>
+  </article>
+
+  <script type="text/html" id="kfRow">
+    <li data-value="{kfId}">{kfName}</li>
+  </script>
+  <script type="text/html" id="priceRow">
+    <li>{price}</li>
+  </script>
+  <script type="text/html" id="typeRow">
+    <li data-value="{id}" data-type="{type}">{content}</li>
+  </script>
+  <script type="text/html" id="recordRow">
+    <tr data-value="{recordId}">
+      <td>{kfId}</td>
+      <td>{goodId}</td>
+      <td>{logType}</td>
+      <td>{doStatus}</td>
+      <td>{account}</td>
+      <td>{ip}</td>
+      <td>{time}</td>
+      <td>{content}</td>
+    </tr>
+  </script>
+
+  <script type="text/javascript" src="../js/jquery-2.x-git.min.js"></script>
+  <script type="text/javascript" src="../js/dcalendar.picker.js"></script>
+  <script type="text/javascript" src="../js/echarts.min.js"></script>
+  <script type="text/javascript" src="../js/common.js"></script>
+  <script type="text/javascript" src="../js/util.js"></script>
+  <script type="text/javascript" src="../js/config.js"></script>
+  <script type="text/javascript" src="../js/api.js"></script>
+  <script type="text/javascript" src="../js/log.js"></script>
+</body>
+
+</html>

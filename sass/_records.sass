@@ -1,0 +1,78 @@
+$cr1: #fff
+$cr3: #cf3400
+$cr4: #dfe0eb
+@import '_mixin'
+
+.records
+  box-shadow: 0 0 9px #dadadf
+  thead
+    height: 43px
+    line-height: 43px
+    background: $cr4
+    tr th
+      border: bd1(#999999)
+  tbody
+    tr
+      position: relative
+      height: 49px
+      line-height: 48px
+      border-bottom: 1px solid $cr4
+      &:last-child
+        border-bottom: none
+      &:hover
+        background: rgba(237, 234, 234, 0.9)
+      td
+        border: bd1(#999999)
+        border-top: 0
+      td.operation .txt
+        display: inline-block
+        margin-right: 4px
+        cursor: pointer
+  tfoot
+    #btn-export
+      width: 100px
+      height: 36px
+      background: $cr3
+      color: $cr1
+      border-radius: 5px
+      margin-top: 20px
+    tr.do
+      height: 64px
+      line-height: 64px
+      td input
+        @include btn(110px, 38px, 5px, 20px, #cf3400)
+    .paginator
+      margin: 32px 0 27px
+      .page
+        height: 34px
+        line-height: 34px
+        padding: 0 18px
+        border: bd1(#efefef)
+        cursor: pointer
+        margin-right: 4px
+        &:hover
+          border: bd1(#4c8bfd)
+          color: #4c8bfd
+        &.ellipsis
+          border: none
+        &.current
+          background: #4c8bfd
+          color: $cr1
+      .all .num
+        padding-left: 4px
+      .turn-to
+        input
+          width: 40px
+          height: 32px
+          padding: 0 8px
+          border: bd1(#4c8bfd)
+          margin: 0 4px
+          cursor: pointer
+      .go
+        margin: 0 4px
+        .iconz
+          vertical-align: middle
+          color: #4c8bfd
+          font-size: 32px
+          &:hover
+            transform: translateX(3px)

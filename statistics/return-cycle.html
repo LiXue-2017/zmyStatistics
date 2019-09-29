@@ -9,11 +9,11 @@
   <link rel="stylesheet" href="../css/reset.css" />
   <link rel="stylesheet" href="../css/icon-font.css" />
   <link rel="stylesheet" href="../css/dcalendar.picker.css" />
-  <link rel="stylesheet" href="../css/game-volume.css" />
+  <link rel="stylesheet" href="../css/return-cycle.css" />
 </head>
 
 <body>
-  <!-- 数据统计 成本 -->
+  <!-- 数据统计 回报周期 -->
   <article>
     <section class="drag-box"></section>
     <section class="main">
@@ -32,41 +32,31 @@
       <!-- 专区统计 -->
       <ul class="game-area">
         <li class="area all">
-          <img src="../assets/bg-game-vol1.png">
-          <div class="details">
-            <p class="number"></p>
-            <h4 class="title">今日总成交</h4>
-          </div>
+          <h4 class="title">总平均回报周期</h4>
+          <p class="number"></p>
         </li>
         <li class="area duan">
-          <img src="../assets/bg-game-vol3.png">
-          <div class="details">
-            <p class="number"></p>
-            <h4 class="title">端游专区 </h4>
-          </div>
+          <h4 class="title">端游专区平均回报周期</h4>
+          <p class="number"></p>
         </li>
         <li class="area hand">
-          <img src="../assets/bg-game-vol2.png">
-          <div class="details">
-            <p class="number"></p>
-            <h4 class="title">手游专区</h4>
-          </div>
+          <h4 class="title">手游专区平均回报周期</h4>
+          <p class="number"></p>
         </li>
         <li class="area page">
-          <img src="../assets/bg-game-vol4.png">
-          <div class="details">
-            <p class="number"></p>
-            <h4 class="title">页游专区</h4>
-          </div>
+          <h4 class="title">页游专区平均回报周期</h4>
+          <p class="number"></p>
         </li>
       </ul>
-      <section class="volume">
-        <div class="statistics">
+      <!-- 平均回报周期 -->
+      <section class="statistics average-period">
+        <div class="top-box">
+          <h4 class="title">平均回报周期</h4>
           <div class="search">
             <!-- 专区 -->
             <div class="select-box fs16 cr2">
               <div class="select-text">端游专区</div>
-              <ul class="select-ul gameType" data-selected="0">
+              <ul class="select-ul gameType" data-part="1" data-selected="0">
                 <li class="current" data-value="0">端游专区</li>
                 <li data-value="1">手游专区</li>
                 <li data-value="2">页游专区</li>
@@ -76,15 +66,43 @@
             <!-- 游戏 -->
             <div class="select-box fs16 cr2">
               <div class="select-text"></div>
-              <ul class="select-ul gameList" data-selected=""></ul>
+              <ul class="select-ul gameList" data-part="1" data-selected=""></ul>
               <i class="iconz icon-arrow-down cr2 fs20"></i>
             </div>
           </div>
-          <div class="chart"></div>
         </div>
-        <div class="rank-list">
-          <h4 class="title">游戏成交量排行</h4>
-          <ul class="list"></ul>
+        <!-- 统计图 -->
+        <div class="chart chart-bar"></div>
+      </section>
+      <!-- 回报周期统计 -->
+      <section class="return-cycle">
+        <!-- 回报周期统计 -->
+        <div class="data-table clearfix">
+          <h4 class="title">回报周期统计</h4>
+          <ul class="game-type right" data-part="2" data-selected="0">
+            <li class="type current" data-value="0">端游专区</li>
+            <li class="type" data-value="1">手游专区</li>
+            <li class="type" data-value="2">页游专区</li>
+          </ul>
+          <!-- 数据表 -->
+          <table class="data full">
+            <thead>
+              <tr>
+                <th>排名</th>
+                <th>游戏名字</th>
+                <th class="ratio">占比</th>
+                <th>回收</th>
+                <th>出售</th>
+                <th>平均回报周期</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <!-- 游戏占比 -->
+        <div class="stastics-ratio">
+          <h4 class="title">游戏占比统计</h4>
+          <div class="chart "></div>
         </div>
       </section>
     </section>
@@ -93,16 +111,19 @@
   <script type="text/html" id="gameRow">
     <li data-value="{gameId}">{gameName}</li>
   </script>
-  <script type="text/html" id="rankRow">
-    <li class="item">
-      <span class="rank">
-        <i class="icon hide"></i>
-        <span class="txt">{rank}</span>
-      </span>
-      <span class="game-name">{gameName}</span>
-      <span class="number">{volume}</span>
-    </li>
+  <script type="text/html" id="dataRow">
+    <tr>
+      <td>{rank}</td>
+      <td>{gameName}</td>
+      <td class="ratio">
+        <div class="ratio-box" title="{ratio}"></div>
+      </td>
+      <td>{recoveryNum}</td>
+      <td>{saleNum}</td>
+      <td>{cycle}</td>
+    </tr>
   </script>
+
   <script type="text/javascript" src="../js/jquery-2.x-git.min.js"></script>
   <script type="text/javascript" src="../js/dcalendar.picker.js"></script>
   <script type="text/javascript" src="../js/echarts.min.js"></script>
@@ -110,7 +131,7 @@
   <script type="text/javascript" src="../js/util.js"></script>
   <script type="text/javascript" src="../js/config.js"></script>
   <script type="text/javascript" src="../js/api.js"></script>
-  <script type="text/javascript" src="../js/game-volume.js"></script>
+  <script type="text/javascript" src="../js/return-cycle.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,132 @@
+$cr1: #fff
+
+@import './_mixin'
+
+.infos
+  position: relative
+  padding: 26px 42px 26px 30px
+  margin-bottom: 30px
+  background-color: #fff
+  .cap
+    margin-bottom: 40px
+  .search-list
+    width: 100%
+    padding-left: 30px
+    display: flex
+    flex-wrap: wrap
+    margin-right: -5%
+    .item
+      width: 25%
+      min-width: 25%
+      max-width: 25%
+      flex: 1
+      margin-bottom: 24px
+      display: flex
+      .title
+        flex: 0 0 auto
+        line-height: 36px
+      .select-box
+        flex: 0 0 234px
+        position: relative
+        height: 36px
+        .select-text
+          position: absolute
+          z-index: 20
+          background: transparent
+          top: 0
+          left: 0
+          width: 100%
+          padding: 0 20px 0 10px
+          height: 100%
+          line-height: 36px
+          border: bd1(rgb(229, 229, 229))
+          border-radius: 5px
+        .select-ul
+          display: none
+          position: absolute
+          z-index: 100
+          top: 40px
+          left: -1px
+          width: 100%
+          border: bd1(#D4D4D4)
+          border-radius: 5px
+          background: $cr1
+          max-height: 506px
+          overflow-y: auto
+          &.high-zindex
+            z-index: 120
+          li
+            height: 36px
+            line-height: 36px
+            padding-left: 10px
+            transition: all 0.3s
+            &:hover
+              background: #e598fd
+              color: $cr1                      
+            &.current
+              background: #b87fca
+              color: $cr1
+        .iconz
+          position: absolute
+          z-index: 10
+          right: 3px
+          top: 50%
+          margin-top: -10px
+        &.focus
+          .select-text
+            border: bd1(#b87fca)
+          .iconz
+            color: #b87fca
+      .txt-box
+        flex: 0 0 234px
+        height: 36px
+        line-height: 36px
+        input
+          width: 100%
+          height: 36px
+          border: bd1(rgb(229, 229, 229))
+          border-radius: 5px
+          padding-left: 8px
+          &:focus
+            border: bd1(#e598fd)
+      .time-box
+        flex: 0 0 234px
+        position: relative
+        display: flex
+        justify-content: space-between
+        input
+          width: 100%
+          height: 42px
+          border: 1px solid #e5e5e5
+          border-radius: 5px
+          padding: 0 10px
+          font-size: 14px
+          color: #999
+          &:focus
+            border: bd1(#e598fd)
+  .btn-box
+    input
+      width: 110px
+      height: 38px
+      border-radius: 5px
+      overflow: hidden
+      border: bd1(#cf3400)
+      color: #cf3400
+      cursor: pointer
+      &:hover
+        background: #cf3400
+        color: #fff
+        transition: all .2s
+  .num-box
+    text-align: right
+  .refresh-box
+    position: absolute
+    right: 20px
+    top: 30px
+    .icon-refresh
+      color: #4c8bfd
+      cursor: pointer
+      transition: all .3s
+      &:hover
+        transform: rotate(90deg)
+

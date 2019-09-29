@@ -1,0 +1,202 @@
+@import './_mixin'
+
+article
+  display: flex
+  @import './_menus-top'
+  .main
+    flex: 1
+    margin-top: 62px
+    background: #f3f3f8
+    padding: 18px 3%
+    .head
+      margin-bottom: 28px
+      .service
+        margin-right: 52px
+        .select-box
+          width: 136px
+          @include selectBoxBtm(160px, 34px, #acafb0, #29718c, #6bb7cc)
+      .time
+        display: flex
+        justify-content: flex-end
+        margin-right: 20px
+        .cap
+          line-height: 34px
+        .time-box
+          @include time-box(228px, 34px, #00bfb4)
+          margin-right: 18px
+      .btn-box
+        flex: 0 0 66px
+        .btn
+          @include btnback(66px, 34px, 4px, 16px, #00bfb4)
+          &:hover
+            background: #09a299
+    .game-area
+      width: 100%
+      display: flex
+      justify-content: space-between
+      margin-bottom: 50px
+      .area
+        position: relative
+        flex: 0 0 340px
+        border-radius: 10px
+        opacity: 0.8
+        width: 340px
+        height: 190px
+        .title
+          padding: 14px 0 10px 16px
+          color: #fff
+        .number
+          line-height: 110px
+          text-align: center
+          font-size: 32px
+          color: #fff  
+        &::after
+          display: block
+          content: ''
+          position: absolute
+          right: 10px
+          top: 8px
+          background-size: cover
+        &:nth-child(1)
+          background: -moz-linear-gradient( 0deg, rgb(96,145,224) 0%, rgb(162,149,247) 100%)
+          background: -webkit-linear-gradient( 0deg, rgb(96,145,224) 0%, rgb(162,149,247) 100%)
+          background: -ms-linear-gradient( 0deg, rgb(96,145,224) 0%, rgb(162,149,247) 100%)
+          box-shadow: 0px 5px 15px 0px rgba(17, 104, 170, 0.75)
+          .title
+            border-bottom: bd1(rgba(86, 103, 162, 0.502))
+          &::after
+            width: 86px
+            height: 95px
+            background: url(../assets/bg-account1.png) no-repeat
+        &:nth-child(2)
+          background-image: -moz-linear-gradient( 0deg, rgb(80,170,203) 0%, rgb(75,191,177) 100%)
+          background-image: -webkit-linear-gradient( 0deg, rgb(80,170,203) 0%, rgb(75,191,177) 100%)
+          background-image: -ms-linear-gradient( 0deg, rgb(80,170,203) 0%, rgb(75,191,177) 100%)
+          box-shadow: 0px 5px 15px 0px rgba(46, 96, 207, 0.75)
+          .title
+            border-bottom: bd1(rgba(116, 188, 246, 0.502))
+          &::after
+            width: 81px
+            height: 75px
+            background: url(../assets/bg-account2.png) no-repeat  
+        &:nth-child(3)
+          background-image: -moz-linear-gradient( 0deg, rgb(235,120,143) 0%, rgb(252,174,140) 100%)
+          background-image: -webkit-linear-gradient( 0deg, rgb(235,120,143) 0%, rgb(252,174,140) 100%)
+          background-image: -ms-linear-gradient( 0deg, rgb(235,120,143) 0%, rgb(252,174,140) 100%)
+          box-shadow: 0px 5px 15px 0px rgba(116, 188, 246, 0.75)
+          .title
+            border-bottom: bd1(rgba(86, 103, 162, 0.502))
+          &::after
+            width: 93px
+            height: 83px
+            background: url(../assets/bg-account3.png) no-repeat 
+        &:nth-child(4)
+          background-image: -moz-linear-gradient( 0deg, rgb(88,160,227) 0%, rgb(86,187,220) 100%)
+          background-image: -webkit-linear-gradient( 0deg, rgb(88,160,227) 0%, rgb(86,187,220) 100%)
+          background-image: -ms-linear-gradient( 0deg, rgb(88,160,227) 0%, rgb(86,187,220) 100%)
+          box-shadow: 0px 3px 7px 0px rgba(212, 179, 252, 0.75)
+          .title
+            border-bottom: bd1(rgba(86, 103, 162, 0.502))
+          &::after
+            width: 96px
+            height: 62px
+            background: url(../assets/bg-account4.png) no-repeat 
+    .statistics
+      margin-bottom: 44px
+      .top-box
+        display: flex
+        justify-content: space-between
+        padding-right: 176px
+        .title
+          display: inline-block
+          vertical-align: middle
+          margin-bottom: 16px
+          color: #2d92b3
+          font-size: 25px
+        .search
+          .select-box
+            @include selectBoxBtm(142px, 34px, #acafb0, #29718c, #6bb7cc)
+      .chart   
+        width: 100%
+        height: 280px
+    .return-cycle  
+      display: flex
+      justify-content: space-between
+      // padding: 0 150px
+      .data-table
+        border: 3px solid #f5f5f5
+        padding: 14px 1%
+        flex: 0 0 55%
+        .title
+          display: inline-block
+          vertical-align: middle
+          margin-bottom: 16px
+          color: #2d92b3
+          font-size: 25px
+        .game-type
+          .type
+            display: inline-block
+            padding: 0 12px 6px
+            font-size: 16px
+            color: #888
+            cursor: pointer
+            &:last-child
+              margin-right: 0
+            &.current
+              border-bottom: bd1(#2d92b3)
+              color: #2d92b3
+        .data 
+          thead
+            font-size: 16px
+            color: rgb(15, 110, 141)
+            line-height: 1.2
+            border-top: bd1(#d5d7d7)
+            border-bottom: bd1(#d5d7d7)
+            line-height: 36px
+            th.ratio
+              text-align: left                  
+          tbody
+            tr
+              line-height: 34px
+              font-size: 16px
+              color: rgb(15, 110, 141)
+              text-align: center
+              border-bottom: bd1(#d5d7d7)
+              td.ratio
+                position: relative
+                text-align: left
+                width: 36%
+                &:hover::before
+                  position: absolute
+                  top: 0
+                  left: 0
+                  content: ""
+                  width: 100%
+                  border-top: 1px solid #708090
+                &:hover::after
+                  position: absolute
+                  top: 0
+                  left: 0
+                  content: ""
+                  width: 100%
+                  height: 100%
+                  background: rgba(112, 128, 144, 0.2)
+                .ratio-box
+                  width: 0
+                  height: 13px
+                  border-radius: 0 6px 6px 0
+                  background: linear-gradient(0deg, #4399b8 0%, #4bbacb 100%)
+                  background: -webkit-linear-gradient(0deg, #4399b8 0%, #4bbacb 100%)      
+      .stastics-ratio
+        flex: 0 0 40%
+        border: 3px solid #f5f5f5
+        padding: 14px 1%
+        .title
+          display: inline-block
+          vertical-align: middle
+          margin-bottom: 16px
+          color: #2d92b3
+          font-size: 25px
+        .chart
+          width: 100%
+          height: 350px

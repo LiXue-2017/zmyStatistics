@@ -22,7 +22,6 @@ function getGameList(token, typeInt, listDom, hasAll) {
         listDom.html(htmlStr);
         // 默认选中第一个
         liSelected(listDom.children('li').first());
-        
       } else {
         resetSelect(listDom, '', '');
         listDom.empty();
