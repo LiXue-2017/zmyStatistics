@@ -17,7 +17,7 @@ $(function () {
   $('#eDate').dcalendarpicker();
 
   // 获取游戏分类
-  getGames(gameDuan);
+  getGameList(token, gameDuan, $('.main .statistics .gameList'), getData, emptyData);
 
   // 下拉框点击事件
   $('.main .select-box .select-text').click(function (e) {
@@ -28,8 +28,10 @@ $(function () {
     liChangeStyle($(this));
     // 选择专区
     if ($(this).parent().hasClass('gameType')) {
+      $(this).parent().attr('data-selected', $(this).attr('data-value'));
+      getGameList(token, parseInt($(this).attr('data-value')), $('.main .statistics .gameList'), getData, emptyData);
       // getGameList(token, $(this).attr('data-value'), $('.main .volume .gameList'), false);
-      getGames(parseInt($(this).attr('data-value')));
+      // getGames();
     }
     // 选择游戏
     if ($(this).parent().hasClass('gameList')) {
@@ -93,40 +95,41 @@ $(function () {
       }
     }]
   }
+  var chartLine = echarts.init($('.main .volume .statistics .chart')[0]);
 
-// 获取游戏分类
-function getGames(gameArea) {
-  var params = {
-    a: 'get_yxlist',
-    token: token,
-    ctype: gameArea
-  }
-
-  $.post(HTTP_SERVERNAME + '/worksystem/statistical.php', params, function (data, status) {
-    var code = data.code;
-    checkToken(code);
-    if (code == 0) {
-      var list = data.param;
-      var listDom = $('.main .volume .gameList');
-      if (list && list.length > 0) {
-        var htmlStr = '';
-        list.forEach(function (val, index) {
-          htmlStr += getTemplate('#gameRow', {
-            gameId: val.yx_id,
-            gameName: val.yx_name
-          });
-        });
-        listDom.html(htmlStr);
-        // 默认选中第一个
-        liSelected(listDom.children('li').first());
-      } else {
-        resetSelect(listDom, '', '');
-        listDom.empty();
-      }
-      getData();
+  // 获取游戏分类
+  function getGames(gameArea) {
+    var params = {
+      a: 'get_yxlist',
+      token: token,
+      ctype: gameArea
     }
-  }, 'json');
-}
+
+    $.post(HTTP_SERVERNAME + '/worksystem/statistical.php', params, function (data, status) {
+      var code = data.code;
+      checkToken(code);
+      if (code == 0) {
+        var list = data.param;
+        var listDom = $('.main .volume .gameList');
+        if (list && list.length > 0) {
+          var htmlStr = '';
+          list.forEach(function (val, index) {
+            htmlStr += getTemplate('#gameRow', {
+              gameId: val.yx_id,
+              gameName: val.yx_name
+            });
+          });
+          listDom.html(htmlStr);
+          // 默认选中第一个
+          liSelected(listDom.children('li').first());
+        } else {
+          resetSelect(listDom, '', '');
+          listDom.empty();
+        }
+        getData();
+      }
+    }, 'json');
+  }
 
   // 获取页面数据
   function getData() {
@@ -162,6 +165,9 @@ function getGames(gameArea) {
         var gameArea = data.param.head;
         var gameVolume = data.param.body;
         var rankData = data.param.foot;
+   
+        emptyData();
+
         // 专区统计
         if (gameArea) {
           $('.main .game-area .all .number').text(gameArea.quan.all);
@@ -178,7 +184,6 @@ function getGames(gameArea) {
             lineOption.xAxis.data.push(element.dtime);
             lineOption.series[0].data.push(element.num);
           });
-          var chartLine = echarts.init($('.main .volume .statistics .chart')[0]);
           chartLine.setOption(lineOption);
         }
         // 游戏成交量排行
@@ -198,5 +203,12 @@ function getGames(gameArea) {
       }
     }, 'json');
   }
+
+// 清空页面数据
+function emptyData() {
+  lineOption.xAxis.data = [];
+  lineOption.series[0].data = [];
+  chartLine.setOption(lineOption);
+}
 
 });

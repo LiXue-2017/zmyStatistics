@@ -115,15 +115,14 @@ $(function () {
           records.forEach(function (val, index) {
             var htmlStr = getTemplate('#recordRow', {
               recordId: val.id,
-              kfId: val.yx_name,
-              goodId: val.money,
+              kfName: val.username,
+              goodId: val.goods_id,
               logType: val.ltype,
-              // doStatus: val.
-              // account: val.
-              ip: val.IP,
-              time: val.ctime,
-              content: val.content,
-              // account: val.account,
+              doStatus: val.gStatus,
+              account: val.acc,
+              ip: val.ip,
+              time: timeToDate(val.ctime),
+              content: val.content
             });
             $('.records tbody').append(htmlStr);
           });

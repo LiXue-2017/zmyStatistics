@@ -20,7 +20,6 @@ $(function () {
   // 获取游戏分类
   getGameList(token, gameDuan, $('.main .statistics .gameList'), getData, emptyData);
 
-  // getData();
   // 下拉框点击事件  
   $('.main .select-box .select-text').click(function (e) {
     showSlectBottom($(this).parent(), $(this).siblings('i'), 200);
@@ -155,39 +154,6 @@ $(function () {
   // 初始化图表
   var chartBar = echarts.init($('.main .average-period .chart')[0]);
   var chartPie = echarts.init($('.main .return-cycle .stastics-ratio .chart')[0]);
-
-  // 获取游戏分类
-  function getGames(gameArea) {
-    var params = {
-      a: 'get_yxlist',
-      token: token,
-      ctype: gameArea
-    }
-
-    $.post(HTTP_SERVERNAME + '/worksystem/statistical.php', params, function (data, status) {
-      var code = data.code;
-      checkToken(code);
-      if (code == 0) {
-        var list = data.param;
-        var listDom = $('.main .average-period .gameList');
-        if (list && list.length > 0) {
-          var htmlStr = '';
-          list.forEach(function (val, index) {
-            htmlStr += getTemplate('#gameRow', {
-              gameId: val.yx_id,
-              gameName: val.yx_name
-            });
-          });
-          listDom.html(htmlStr);
-          // 默认选中第一个
-          liSelected(listDom.children('li').first());
-        } else {
-          resetSelect(listDom, '', '');
-          listDom.empty();
-        }
-      }
-    }, 'json');
-  }
 
   // 获取 回报周期 数据
   function getData() {
