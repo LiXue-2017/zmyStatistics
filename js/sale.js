@@ -26,6 +26,11 @@ $(function () {
   $('.content .select-box .select-ul').on('click', 'li', function () {
     showSlectBottom($(this).parents('.select-box'), $(this).parent().siblings('i'), 200);
     liChangeStyle($(this));
+    // 选择专区
+    if ($(this).parent().hasClass('gameType')) {
+      $(this).parent().attr('data-selected', $(this).attr('data-value'));
+      getGameList(token, $(this).attr('data-value'), $('.content .statistics .gameList'), getData, emptyData);
+    }
     // 选择游戏
     if ($(this).parent().hasClass('gameList')) {
       $(this).parent().attr('data-selected', $(this).attr('data-value'));
@@ -34,10 +39,7 @@ $(function () {
   });
 
   // 获取游戏
-  getGames(token, $('.content .statistics .gameList'), false);
-
-  // 获取 成本的数据统计
-  getData();
+  getGameList(token, gameDuan, $('.content .statistics .gameList'), getData, emptyData);
 
   // 点击搜索
   $('.content .statistics #btn-search').click(function () {
@@ -46,12 +48,12 @@ $(function () {
 
   // 初始化折线图
   var chartLine = echarts.init($('.content .statistics .chart')[0]);
-  var chartLineOption = {
+  var lineOption = {
     tooltip: {
       trigger: 'axis'
     },
     legend: {
-      data: ['利润率', '成本率']
+      data: ['利润', '成本']
     },
     xAxis: {
       type: 'category',
@@ -65,7 +67,7 @@ $(function () {
       }
     },
     series: [{
-        name: '利润率',
+        name: '利润',
         type: 'line',
         data: [],
         markPoint: {
@@ -87,7 +89,7 @@ $(function () {
         }
       },
       {
-        name: '成本率',
+        name: '成本',
         type: 'line',
         data: [],
         markPoint: {
@@ -113,7 +115,7 @@ $(function () {
 
   // 初始化饼图
   var chartPie = echarts.init($('.content .ration .chart')[0]);
-  var chartPieOption = {
+  var pieOption = {
     tooltip: {
       trigger: 'item',
       formatter: "{a} <br/>{b}: {c} ({d}%)"
@@ -133,7 +135,6 @@ $(function () {
       name: '账号占比',
       type: 'pie',
       radius: ['0', '60%'],
-      avoidLabelOverlap: false,
       label: {
         normal: {
           formatter: '{b|{b}：}{c}  {per|{d}%}  ',
@@ -187,6 +188,7 @@ $(function () {
     if (gameId != '') {
       params.yxid = parseInt(gameId);
     }
+    
     console.table(params)
     $.post(HTTP_SERVERNAME + '/worksystem/statistical.php', params, function (data, status) {
       var code = data.code;
@@ -195,34 +197,34 @@ $(function () {
         var head = data.param.head.cost;
         var dataPie = data.param.body.left;
         var dataTable = data.param.body.right;
+
+        // 清空
+        emptyData();
+
         // 头部
         if (head) {
           head.forEach(item => {
-            chartLineOption.xAxis.data.push(item.dtime);
-            chartLineOption.series[0].data.push(item.profit);
-            chartLineOption.series[1].data.push(item.smoney);
+            lineOption.xAxis.data.push(item.dtime);
+            lineOption.series[0].data.push(item.profit);
+            lineOption.series[1].data.push(item.smoney);
           });
-          chartLine.setOption(chartLineOption);
+          chartLine.setOption(lineOption);
         }
         // 利润占比统计
         if (dataPie) {
-          chartPieOption.series[0].data.push({
+          pieOption.series[0].data.push({
             name: '利润',
             value: dataPie.lr
           });
-          chartPieOption.series[0].data.push({
+          pieOption.series[0].data.push({
             name: '成本',
             value: dataPie.cb
           });
-          chartPieOption.series[0].data.push({
+          pieOption.series[0].data.push({
             name: '出售',
             value: dataPie.cs
           });
-          // dataPie.forEach(item => {
-          //   // chartPieOption.legend.data.push(item.);
-           
-          // });
-          chartPie.setOption(chartPieOption);
+          chartPie.setOption(pieOption);
         }
         if (dataTable) {
           var htmStr = '';
@@ -231,13 +233,25 @@ $(function () {
               saleTime: item.dtime,
               salePrice: item.cmoney,
               recoveryPrice: item.smoney,
-              profit: item.bf_lr,
-              cost: item.bf_cost
+              profit: item.bf_lr + '%',
+              cost: item.bf_cost + '%'
             });
           });
           $('.chapter .data tbody').html(htmStr);
         }
       }
     }, 'json');
+  }
+
+  function emptyData(){
+    lineOption.xAxis.data = [];
+    lineOption.series[0].data = [];
+    lineOption.series[1].data = [];
+    chartLine.setOption(lineOption);
+
+    pieOption.series[0].data = [];
+    chartPie.setOption(pieOption);
+  
+    $('.chapter .data tbody').empty();
   }
 });

@@ -1,5 +1,12 @@
-// 获取游戏分类
-function getGameList(token, typeInt, listDom, hasAll) {
+/**
+ * 获取游戏分类
+ * @param {} token 
+ * @param {游戏类型} typeInt 
+ * @param {容纳数据的父元素} listDom 
+ * @param {有数据时执行的回调} callback1 
+ * @param {无数据时执行的回调} callback2 
+ */
+function getGameList(token, typeInt, listDom, callback1, callback2) {
   var params = {
     a: 'get_yxlist',
     token: token,
@@ -12,7 +19,7 @@ function getGameList(token, typeInt, listDom, hasAll) {
     if (code == 0) {
       var list = data.param;
       if (list && list.length > 0) {
-        var htmlStr = hasAll == true ? '<li class="current" data-value="0">全部</li>' : '';
+        var htmlStr = '';
         list.forEach(function (val, index) {
           htmlStr += getTemplate('#gameRow', {
             gameId: val.yx_id,
@@ -22,10 +29,13 @@ function getGameList(token, typeInt, listDom, hasAll) {
         listDom.html(htmlStr);
         // 默认选中第一个
         liSelected(listDom.children('li').first());
+        callback1();
       } else {
         resetSelect(listDom, '', '');
         listDom.empty();
+        callback2();  
       }
+      
     }
   }, 'json');
 }

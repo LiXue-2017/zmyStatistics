@@ -4,7 +4,7 @@ $(function () {
 
   // 加载公共顶侧菜单
   $('.drag-box').load('_menus-top.html', function () {
-    changeMenuCurrent($(this).find('.item.data-statistics'), '.return-cycle');
+    changeMenuCurrent($(this).find('.item.log'));
     $('.drag-box .user-name').text(user + '，欢迎您~');
   });
 
@@ -15,9 +15,22 @@ $(function () {
   $('#sDate').dcalendarpicker();
   $('#eDate').dcalendarpicker();
 
+  // 获取所有客服
+  getAllKf();
+
   // 首次获取列表数据
   var requestParam = getRequestParam();
   getDataList(requestParam);
+
+  // 下拉框点击事件  
+  $('.main .select-box .select-text').click(function (e) {
+    showSlectBottom($(this).parent(), $(this).siblings('i'), 200);
+  });
+  $('.main .select-box .select-ul').on('click', 'li', function () {
+    showSlectBottom($(this).parents('.select-box'), $(this).parent().siblings('i'), 200);
+    liChangeStyle($(this));
+  });
+
 
   // 点击搜索
   $('.infos #btn-search').click(function () {
@@ -51,7 +64,6 @@ $(function () {
       getDataList(requestParam);
     }
   });
-
 
   // 获取请求列表数据需要的参数
   function getRequestParam() {
@@ -96,8 +108,7 @@ $(function () {
       checkToken(data.code);
       var code = data.code;
       if (code == 0) {
-        // showRecordsNum($('.infos .num-box .account'), data.param.cont);
-        // showRecordsNum($('.infos .num-box .money'), data.param.price);
+        showRecordsNum($('.infos .num-box .number'), data.param.cont);
         var records = data.param.list;
         if (records) {
           $('.records tbody').html('');
@@ -106,24 +117,48 @@ $(function () {
               recordId: val.id,
               kfId: val.yx_name,
               goodId: val.money,
-              account: val.account,
-              rKf: val.uname,
-              rTime: timeToDate(val.ctime),
-              aKf: val.username,
-              aTime: timeToDate(val.shtime),
-              payAccount: val.tkfs,
-              payUser: val.name
+              logType: val.ltype,
+              // doStatus: val.
+              // account: val.
+              ip: val.IP,
+              time: val.ctime,
+              content: val.content,
+              // account: val.account,
             });
             $('.records tbody').append(htmlStr);
           });
-          var pager = getPages(parseInt(data.param.cont), requestParam.page, 10)
+          var pager = getPages(parseInt(data.param.cont), requestParam.page, 20)
           $('.records .pageWrapper').html(pager);
         }
-        if ($('.search-list .priceList').children().length == 0) {
-          if (data.param.money) {
-            getPrices(data.param.money, $('.search-list .priceList'));
+        // 商品状态
+        var status = data.param.gtype;
+        if(status) {
+          $('.search-list .goodStatus').empty();
+          var htmlStr = '<li class="current" data-value="0">全部</li>';
+          for(var i in status) {
+            htmlStr += getTemplate('#typeRow', {
+              id: i,
+              value: status[i]
+            });
           }
+          $('.search-list .goodStatus').append(htmlStr);
         }
+
+        //日志类型 
+        var logType = data.param.ltype;
+        if(logType) {
+          $('.search-list .logType').empty();
+          var htmlStr = '<li class="current" data-value="0">全部</li>';
+          for(var i in logType) {
+            htmlStr += getTemplate('#typeRow', {
+              id: i,
+              value: logType[i]
+            });
+          }
+          $('.search-list .logType').append(htmlStr);
+
+        }
+        
       }
       if (code == 400) {
         alert(data.msg);
@@ -131,5 +166,33 @@ $(function () {
     }, 'json');
   }
 
-  
+  // 获取所有客服
+  function getAllKf() {
+    var params = {
+      a: 'get_userlist',
+      token: token
+    }
+
+    $.post(HTTP_SERVERNAME + '/worksystem/statistical.php', params, function (data, status) {
+      checkToken(data.code);
+      var code = data.code;
+      if (code == 0) {
+        var records = data.param;
+        if (records) {
+          var htmlStr = '<li class="current" data-value="0">全部</li>';
+          records.forEach(function (val, index) {
+            htmlStr += getTemplate('#kfRow', {
+              kfId: val.user_id,
+              kfName: val.username
+            });
+            console.log(htmlStr);
+          });
+          $('.search-list .kfList').append(htmlStr);
+          
+        }
+      }
+    }, 'json');
+
+  }
+
 });

@@ -42,11 +42,18 @@ article
         opacity: 0.8
         width: 340px
         height: 190px
+        transition: all 0.2s
+        &:hover
+          transform: scale(1.2)
+          .number
+            font-size: 42px
+          .details
+            font-size: 20px
         .title
           padding: 14px 0 10px 16px
           color: #fff
         .number
-          line-height: 110px
+          line-height: 90px
           text-align: center
           font-size: 32px
           color: #fff
@@ -54,7 +61,7 @@ article
           display: flex
           justify-content: space-around
           padding-bottom: 22px
-          font-size: 14px
+          font-size: 16px
           color: #fff
         &::after
           display: block
@@ -153,7 +160,7 @@ article
         .title
           display: inline-block
           vertical-align: middle
-          margin-bottom: 16px
+          margin-bottom: 26px
           color: #2d92b3
           font-size: 25px
         .game-type
@@ -217,7 +224,6 @@ article
         .title
           display: inline-block
           vertical-align: middle
-          margin-bottom: 16px
           color: #2d92b3
           font-size: 25px
         .chart

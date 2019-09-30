@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../css/reset.css" />
   <link rel="stylesheet" href="../css/icon-font.css" />
   <link rel="stylesheet" href="../css/homepage.css" />
+  <link rel="stylesheet" href="../css/dcalendar.picker.css" />
 </head>
 
 <body>
@@ -15,36 +16,69 @@
     <section class="drag-box"></section>
     <section class="main">
       <section class="content">
+        <section class="search right">
+          <!-- 数据类型 -->
+          <div class="data-type">
+            <span class="title">数据类型：</span>
+            <div class="select-box fs16 cr2">
+              <div class="select-text">新增人数</div>
+              <ul class="select-ul dataType" data-selected="0">
+                <li class="current" data-value="0">新增人数</li>
+                <li data-value="1">访问人数</li>
+                <li data-value="2">下单人数</li>
+                <li data-value="3">登录人数</li>
+              </ul>
+              <i class="iconz icon-arrow-down cr2 fs20"></i>
+            </div>
+          </div>
+          <div class="time">
+            <span class="cap">查询时间：</span>
+            <div class="time-box ilbk ">
+              <input id="sDate" type="text" name="stime" /><span class="ilbk icon-to">~</span><input id="eDate"
+                type="text" name="etime" />
+            </div>
+          </div>
+          <section class="btn-box">
+            <input class="btn" type="button" id="btn-search" value="搜索" />
+          </section>
+        </section>
         <section class="chapter player-data">
           <h4 class="title">玩家数据</h4>
           <section class="data flex">
             <ul class="typelist">
-              <li class="type">
+              <li class="type new-add">
                 <h5 class="cap">新增人数</h5>
                 <p class="number cr4">100</p>
               </li>
-              <li class="type">
-                <h5 class="cap">新增人数</h5>
+              <li class="type visit">
+                <h5 class="cap">访问人数</h5>
                 <p class="number cr5">100</p>
               </li>
-              <li class="type">
-                <h5 class="cap">新增人数</h5>
+              <li class="type place-order">
+                <h5 class="cap">下单人数</h5>
                 <p class="number cr6">100</p>
               </li>
-              <li class="type">
-                <h5 class="cap">新增人数</h5>
+              <li class="type sign-in">
+                <h5 class="cap">登录人数</h5>
                 <p class="number cr7">100</p>
               </li>
             </ul>
-            <div class="details"></div>
+            <div class="details">
+              <div class="chart"></div>
+            </div>
           </section>
         </section>
-        <section class="chapter visitor-percentage"></section>
+        <section class="chapter visitor-percentage">
+          <h4 class="title">访问人数占比</h4>
+          <div class="chart"></div>
+        </section>
       </section>
     </section>
   </article>
 
   <script type="text/javascript" src="../js/jquery-2.x-git.min.js"></script>
+  <script type="text/javascript" src="../js/dcalendar.picker.js"></script>
+  <script type="text/javascript" src="../js/echarts.min.js"></script>
   <script type="text/javascript" src="../js/common.js"></script>
   <script type="text/javascript" src="../js/util.js"></script>
   <script type="text/javascript" src="../js/config.js"></script>

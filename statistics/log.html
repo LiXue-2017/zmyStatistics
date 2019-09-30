@@ -52,7 +52,7 @@
               <h5 class="title">日志类型：</h5>
               <div class="select-box fs16 cr2">
                 <div class="select-text">全部</div>
-                <ul class="select-ul logType" data-selected="全部"></ul>
+                <ul class="select-ul logType" data-selected="0"></ul>
                 <i class="iconz icon-arrow-down cr2 fs20"></i>
               </div>
             </li>
@@ -61,7 +61,7 @@
               <h5 class="title">商品状态：</h5>
               <div class="select-box fs16 cr2">
                 <div class="select-text">全部</div>
-                <ul class="select-ul goodStatus" data-selected="全部"></ul>
+                <ul class="select-ul goodStatus" data-selected="0"></ul>
                 <i class="iconz icon-arrow-down cr2 fs20"></i>
               </div>
             </li>
@@ -78,12 +78,12 @@
           <div class="btn-box ct">
             <input class="fs18 bg1" type="button" id="btn-search" value="搜索" />
           </div>
-          <div class="num-box fs18">共支出<span class="cr4 number money">0</span>元</div>
+          <div class="num-box fs18">共<span class="cr4 number">0</span>条记录</div>
           <div class="refresh-box ">
             <i class="iconz icon-refresh ilbk fs22"></i>
           </div>
         </form>
-        <table class="records full cr5">
+        <table class="records full cr8">
           <thead class="fs16">
             <tr>
               <th>客服Id</th>
@@ -96,8 +96,8 @@
               <th>操作内容</th>
             </tr>
           </thead>
-          <tbody class="fs14 ct bg1"></tbody>
-          <tfoot class="fs16 cr6 bg1 ct">
+          <tbody class="fs14 bg1"></tbody>
+          <tfoot class="fs16 cr9 bg1 ct">
             <tr>
               <td class="pageWrapper" colspan="8">
               </td>
@@ -115,7 +115,7 @@
     <li>{price}</li>
   </script>
   <script type="text/html" id="typeRow">
-    <li data-value="{id}" data-type="{type}">{content}</li>
+    <li data-value="{id}">{value}</li>
   </script>
   <script type="text/html" id="recordRow">
     <tr data-value="{recordId}">
@@ -126,7 +126,7 @@
       <td>{account}</td>
       <td>{ip}</td>
       <td>{time}</td>
-      <td>{content}</td>
+      <td class="content">{content}</td>
     </tr>
   </script>
 

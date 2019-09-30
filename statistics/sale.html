@@ -19,27 +19,36 @@
     <section class="main">
       <section class="content">
         <section class="chapter statistics">
-          <section class="head">
+          <section class="head clearfix">
             <h4 class="title">利润率/成本率统计</h4>
-            <!-- 游戏 -->
-            <section>
-              <span>游戏名字：</span>
-              <div class="select-box fs16 cr2">
+            <div class="search right">
+              <!-- 专区 -->
+              <div class="select-box fs16 cr2 left">
+                <div class="select-text">端游专区</div>
+                <ul class="select-ul gameType" data-selected="0">
+                  <li data-value="0" class="current">端游专区</li>
+                  <li data-value="1">手游专区</li>
+                  <li data-value="2">页游专区</li>
+                </ul>
+                <i class="iconz icon-arrow-down cr2 fs20"></i>
+              </div>
+              <!-- 游戏 -->
+              <div class="select-box fs16 cr2 left">
                 <div class="select-text"></div>
                 <ul class="select-ul gameList" data-selected=""></ul>
                 <i class="iconz icon-arrow-down cr2 fs20"></i>
               </div>
-            </section>
-            <section class="time">
-              <span class="cap">查询时间：</span>
-              <div class="time-box ilbk ">
-                <input id="sDate" type="text" name="stime" /><span class="ilbk icon-to">~</span><input id="eDate"
-                  type="text" name="etime" />
-              </div>
-            </section>
-            <section class="btn-box ">
-              <input class="btn" type="button" id="btn-search" value="搜索" />
-            </section>
+              <section class="time left">
+                <span class="cap">查询时间：</span>
+                <div class="time-box ilbk ">
+                  <input id="sDate" type="text" name="stime" /><span class="ilbk icon-to">~</span><input id="eDate"
+                    type="text" name="etime" />
+                </div>
+              </section>
+              <section class="btn-box left">
+                <input class="btn" type="button" id="btn-search" value="搜索" />
+              </section>
+            </div>
           </section>
           <section class="chart"></section>
         </section>

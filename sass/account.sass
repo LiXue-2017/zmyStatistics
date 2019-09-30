@@ -13,7 +13,7 @@ article
       margin: 17px 30px 40px
       .chapter
         padding: 22px 34px
-        margin-bottom: 38px
+        margin-bottom: 16px
         .time
           margin-bottom: 16px
           display: flex
@@ -38,6 +38,13 @@ article
             opacity: 0.8
             width: 340px
             height: 190px
+            transition: all 0.2s
+            &:hover
+              transform: scale(1.2)
+              .number
+                font-size: 42px
+              .details
+                font-size: 20px
             &:nth-child(1)
               background: -moz-linear-gradient( 0deg, rgb(96,145,224) 0%, rgb(162,149,247) 100%)
               background: -webkit-linear-gradient( 0deg, rgb(96,145,224) 0%, rgb(162,149,247) 100%)
@@ -93,7 +100,7 @@ article
               padding: 14px 0 10px 16px
               color: #fff
             .number
-              line-height: 110px
+              line-height: 90px
               text-align: center
               font-size: 32px
               color: #fff
@@ -101,7 +108,7 @@ article
               display: flex
               justify-content: space-around
               padding-bottom: 22px
-              font-size: 14px
+              font-size: 16px
               color: #fff
         &.time-statistics
           border: 3px solid #f5f5f5

@@ -12,10 +12,28 @@ article
       background: #fff
       margin: 17px 30px 40px
       overflow-y: auto
-      display: flex
-      flex-direction: column
+      .search
+        display: flex
+        .data-type
+          margin-right: 10px
+          .title
+            line-height: 30px
+          .select-box
+            @include selectBoxBtm(136px, 30px, #acafb0, #29718c, #6bb7cc)
+        .time  
+          display: flex
+          justify-content: flex-end
+          .cap
+            line-height: 34px
+          .time-box
+            @include time-box(228px, 34px, #00bfb4)
+            margin-right: 18px 
+        .btn-box
+          .btn
+            @include btnback(66px, 34px, 4px, 16px, #00bfb4)
+            &:hover
+              background: #09a299 
       .chapter
-        flex: 1
         padding: 22px 34px
         .title
           margin-bottom: 22px
@@ -27,7 +45,7 @@ article
             vertical-align: -3px
             height: 20px
             border-left: 6px solid #36bbb5
-        .data    
+        .data
           display: flex
           .typelist
             flex: 0 0 412px
@@ -44,6 +62,30 @@ article
               border-radius: 10px
               padding-top: 22px
               text-align: center
+              position: relative
+              @include after(10)
+              @include before(20)
+              &::after
+                width: 40px
+                height: 40px
+                top: 0
+                left: 4px
+                transform: translateY(-50%)
+                border-radius: 50%
+              &:nth-child(1)
+                &::after
+                  background: #fe9395
+                &::before
+                  // 未写完
+              &:nth-child(2)
+                &::after
+                  background: #36bbb5
+              &:nth-child(3)
+                &::after
+                  background: #fbbb6e
+              &:nth-child(4)
+                &::after
+                  background: #ec92e0
               .cap
                 color: #333
                 font-size: 16px
@@ -51,5 +93,12 @@ article
               .number
           .details
             flex: 1
-
+            .chart
+              width: 100%
+              height: 360px
+      .visitor-percentage
+        .chart
+          width: 100%
+          height: 340px
+      
 

@@ -18,8 +18,9 @@ $(function () {
   $('#eDate').dcalendarpicker();
 
   // 获取游戏分类
-  getGames(gameDuan);
-  getData();
+  getGameList(token, gameDuan, $('.main .statistics .gameList'), getData, emptyData);
+
+  // getData();
   // 下拉框点击事件  
   $('.main .select-box .select-text').click(function (e) {
     showSlectBottom($(this).parent(), $(this).siblings('i'), 200);
@@ -29,15 +30,13 @@ $(function () {
     liChangeStyle($(this));
     // 选择专区
     if ($(this).parent().hasClass('gameType')) {
-      getGames($(this).attr('data-value'));
-      // getData();
-      getData($(this).parent().attr('data-part'));
+      $(this).parent().attr('data-selected', $(this).attr('data-value'));
+      getGameList(token, parseInt($(this).attr('data-value')), $('.main .statistics .gameList'), getData, emptyData);
     }
     // 选择游戏
     if ($(this).parent().hasClass('gameList')) {
       $(this).parent().attr('data-selected', $(this).attr('data-value'));
-      // getData();
-      getData($(this).parent().attr('data-part'));
+      getData();
     }
   });
 
@@ -45,7 +44,6 @@ $(function () {
   $('.main .head #btn-search').click(function () {
     getData();
   });
-
 
   // 回报周期统计 点击选择 专区
   $('.main .return-cycle .data-table .game-type .type').click(function () {
@@ -80,7 +78,7 @@ $(function () {
       axisPointer: {
         type: 'shadow'
       },
-      formatter: "{b}: <br/> {c} 天"
+      formatter: "{b} <br/> {c} 天"
     },
     xAxis: {
       type: 'category',
@@ -123,10 +121,9 @@ $(function () {
       data: []
     },
     series: [{
-      name: '游戏统计',
+      name: '游戏占比统计',
       type: 'pie',
       radius: ['0', '60%'],
-      avoidLabelOverlap: false,
       label: {
         normal: {
           formatter: '{b|{b}：}{c}  {per|{d}%}  ',
@@ -229,20 +226,15 @@ $(function () {
         var returnData = data.param.foot;
         var dataDom = $('.main .return-cycle .data-table .data tbody');
         // 清空
-        // chartBar.dispose();
-        barOption.xAxis.data = [];
-        barOption.series[0].data = [];
-         
-        pieOption.series[0].data = [];
-        pieOption.legend.data = [];
-        dataDom.empty();
-        // chartPie.dispose();
+        emptyData();
         // 专区统计
         if (gameArea) {
           $('.main .game-area .all .number').text(gameArea.quan.all + '天/账号');
           $('.main .game-area .duan .number').text(gameArea.duan.all + '天/账号');
           $('.main .game-area .hand .number').text(gameArea.shou.all + '天/账号');
-          $('.main .game-area .page .number').text(gameArea.ye.all + '天/账号');
+          if(gameArea.ye) {
+            $('.main .game-area .page .number').text(gameArea.ye.all + '天/账号');
+          }
         }
 
         // 获取 平均回报周期 
@@ -253,10 +245,9 @@ $(function () {
           });
           chartBar.setOption(barOption);
         }
-        console.log(returnData);
         if (returnData == -10000) {
           chartPie.dispose();
-        } else{
+        } else {
           returnData.forEach(function (item, index) {
             var recoveryNum = item.rec ? item.rec : 0;
             var saleNum = item.sell ? item.sell : 0;
@@ -287,5 +278,17 @@ $(function () {
     }, 'json');
   }
 
+  // 清空页面数据
+  function emptyData() {
+    barOption.xAxis.data = [];
+    barOption.series[0].data = [];
+    chartBar.setOption(barOption);
+
+    pieOption.series[0].data = [];
+    pieOption.legend.data = [];
+    chartPie.setOption(pieOption);
+
+    $('.main .return-cycle .data-table .data tbody').empty();
+  }
 
 });

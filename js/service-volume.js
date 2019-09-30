@@ -10,7 +10,11 @@ $(function () {
 
   // 控制菜单显示隐藏
   menuHover();
+  // 获取交易客服
+  getDealkF(token, $('.main .head .kfList'), true);
 
+  getData();
+  
   // 初始化时间选择器
   $('#sDate').dcalendarpicker();
   $('#eDate').dcalendarpicker();
@@ -19,11 +23,15 @@ $(function () {
   $('.main .select-box .select-text').click(function (e) {
     showSlectBottom($(this).parent(), $(this).siblings('i'), 200);
   });
-
-  // 获取交易客服
-  getDealkF(token, $('.main .head .kfList'), true);
-
-  getData();
+  $('.main .select-box .select-ul').on('click', 'li', function () {
+    showSlectBottom($(this).parents('.select-box'), $(this).parent().siblings('i'), 200);
+    liChangeStyle($(this));
+    getData();
+  });
+  // 点击搜索
+  $('.main .head #btn-search').click(function () {
+    getData();
+  });
 
   var pieOption = {
     title: {
@@ -52,7 +60,6 @@ $(function () {
       name: '',
       type: 'pie',
       radius: ['0', '60%'],
-      avoidLabelOverlap: false,
       label: {
         normal: {
           formatter: '{b|{b}：}{c}  {per|{d}%} ',

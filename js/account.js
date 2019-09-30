@@ -139,7 +139,6 @@ $(function () {
       name: '账号占比',
       type: 'pie',
       radius: ['36%', '60%'],
-      avoidLabelOverlap: false,
       label: {
         normal: {
           formatter: '{b|{b}：}{c}  {per|{d}%}  ',
@@ -224,6 +223,14 @@ $(function () {
           headDom.find('.hand .sale').text('售出' + head.shou.sell + '个');
           headDom.find('.hand .recovery').text('回收' + head.shou.rec + '个');
           headDom.find('.hand .return').text('找回' + head.shou.retr + '个');
+          //页游
+          if(head.ye != '') {
+            headDom.find('.page .number').text(page.all + '/个');
+            headDom.find('.page .sale').text('售出' + page.sell + '个');
+            headDom.find('.page .recovery').text('回收' + page.rec + '个');
+            headDom.find('.page .return').text('找回' + page.retr + '个');
+          }
+          
         }
         // 时间统计
         if (body) {

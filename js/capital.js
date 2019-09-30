@@ -18,8 +18,8 @@ $(function () {
   $('#eDate').dcalendarpicker();
 
   // 获取游戏分类
-  getGames(gameDuan);
-  getData();
+  getGameList(token, gameDuan, $('.main .statistics .gameList'), getData, emptyData);
+
   // 下拉框点击事件  
   $('.main .select-box .select-text').click(function (e) {
     showSlectBottom($(this).parent(), $(this).siblings('i'), 200);
@@ -29,15 +29,13 @@ $(function () {
     liChangeStyle($(this));
     // 选择专区
     if ($(this).parent().hasClass('gameType')) {
-      getGames($(this).attr('data-value'));
-      // getData();
-      getData($(this).parent().attr('data-part'));
+      $(this).parent().attr('data-selected', $(this).attr('data-value'));
+      getGameList(token, parseInt($(this).attr('data-value')), $('.main .statistics .gameList'), getData, emptyData);
     }
     // 选择游戏
     if ($(this).parent().hasClass('gameList')) {
       $(this).parent().attr('data-selected', $(this).attr('data-value'));
-      // getData();
-      getData($(this).parent().attr('data-part'));
+      getData();
     }
   });
 
@@ -46,19 +44,20 @@ $(function () {
     getData();
   });
 
-    // 点击选择账号状态
-    $('.main .statistics .capital-status .status').click(function () {
-      $(this).addClass('current').siblings().removeClass('current');
-      $(this).parent().attr('data-selected', $(this).attr('data-value'));
-      getData();
-    });
-
-
-  // 回报周期统计 点击选择 专区
-  $('.main .return-cycle .data-table .game-type .type').click(function () {
+  // 点击选择账号状态
+  $('.main .statistics .capital-status .status').click(function () {
     $(this).addClass('current').siblings().removeClass('current');
     $(this).parent().attr('data-selected', $(this).attr('data-value'));
-    getData($(this).parent().attr('data-part'));
+    getData();
+  });
+
+
+
+  // 点击选择 专区
+  $('.main .pay-statis .data-table .game-type .type').click(function () {
+    $(this).addClass('current').siblings().removeClass('current');
+    $(this).parent().attr('data-selected', $(this).attr('data-value'));
+    getData();
   });
 
   // 柱状图
@@ -87,7 +86,7 @@ $(function () {
       axisPointer: {
         type: 'shadow'
       },
-      formatter: "{b}: <br/> {c} 元"
+      formatter: "{b} <br/> {c}元"
     },
     xAxis: {
       type: 'category',
@@ -130,10 +129,9 @@ $(function () {
       data: []
     },
     series: [{
-      name: '游戏统计',
+      name: '利润占比',
       type: 'pie',
       radius: ['0', '60%'],
-      avoidLabelOverlap: false,
       label: {
         normal: {
           formatter: '{b|{b}：}{c}  {per|{d}%}  ',
@@ -199,12 +197,12 @@ $(function () {
     }, 'json');
   }
 
-  // 获取 回报周期 数据
+  // 获取 页面 数据
   function getData() {
     var stime = $("#sDate").val();
     var etime = $("#eDate").val();
     var gameId = $('.main .statistics .gameList').attr('data-selected');
-    var areaId = parseInt($('.main .data-table .game-type').attr('data-selected'));
+    var areaId = parseInt($('.main .pay-statis .game-type').attr('data-selected'));
     var capStatus = parseInt($('.main .statistics .capital-status').attr('data-selected'));
 
     var params = {
@@ -237,14 +235,9 @@ $(function () {
         var bodyData = data.param.body;
         var footData = data.param.foot.left;
         var dataDom = $('.main .pay-statis .data-table .data tbody');
+
         // 清空
-        // chartBar.dispose();
-        barOption.xAxis.data = [];
-        barOption.series[0].data = [];
-         
-        pieOption.series[0].data = [];
-        pieOption.legend.data = [];
-        dataDom.empty();
+        emptyData();
 
         // 专区统计
         if (gameArea) {
@@ -264,7 +257,7 @@ $(function () {
           $('.main .game-area .page .return').text('找回' + gameArea.ye.zh + '元');
         }
 
-        // 获取 平均回报周期 
+        // 柱状图数据
         if (bodyData) {
           bodyData.forEach(element => {
             barOption.xAxis.data.push(element.dtime);
@@ -305,6 +298,17 @@ $(function () {
       }
     }, 'json');
   }
+  // 清空页面数据
+  function emptyData() {
+    barOption.xAxis.data = [];
+    barOption.series[0].data = [];
+    chartBar.setOption(barOption);
 
+    pieOption.series[0].data = [];
+    pieOption.legend.data = [];
+    chartPie.setOption(pieOption);
+
+    $('.main .pay-statis .data-table .data tbody').empty();
+  }
 
 });

@@ -29,76 +29,77 @@
               <input class="btn" type="button" id="btn-search" value="搜索" />
             </div>
           </section>
+          <!-- 头部统计 -->
           <ul class="game-type">
             <li class="type cost">
               <div class="all sub-item">
                 <h4 class="title">总成本</h4>
-                <p class="number">2000/元</p>
+                <p class="number">0元</p>
                 <div class="details">
-                  <span class="recovery">收购账号100个</span>
-                  <span class="return">找回账号100个</span>
+                  <span class="recovery">收购账号0个</span>
+                  <span class="return">找回账号0个</span>
                 </div>
               </div>
               <!-- 剩余成本 -->
               <!-- <div class="surplus sub-item">
                 <h4 class="title">剩余成本</h4>
                 <div class="details">
-                  <span class="number">2000/元</span>
-                  <span class="account">账号100个</span>
+                  <span class="number">0元</span>
+                  <span class="account">账号0个</span>
                 </div>
               </div> -->
             </li>
             <li class="type duan">
               <div class="all sub-item">
-                <h4 class="title">总成本</h4>
-                <p class="number">2000/元</p>
+                <h4 class="title">端游专区</h4>
+                <p class="number">0元</p>
                 <div class="details">
-                  <span class="recovery">收购账号100个</span>
-                  <span class="return">找回账号100个</span>
+                  <span class="recovery">收购账号0个</span>
+                  <span class="return">找回账号0个</span>
                 </div>
               </div>
               <!-- 剩余成本 -->
               <!-- <div class="surplus sub-item">
                 <h4 class="title">剩余成本</h4>
                 <div class="details">
-                  <span class="number">2000/元</span>
-                  <span class="account">账号100个</span>
+                  <span class="number">0元</span>
+                  <span class="account">账号0个</span>
                 </div>
               </div> -->
             </li>
             <li class="type hand">
               <div class="all sub-item">
-                <h4 class="title">总成本</h4>
-                <p class="number">2000/元</p>
+                <h4 class="title">手游专区</h4>
+                <p class="number">0元</p>
                 <div class="details">
-                  <span class="recovery">收购账号100个</span>
-                  <span class="return">找回账号100个</span>
+                  <span class="recovery">收购账号0个</span>
+                  <span class="return">找回账号0个</span>
                 </div>
               </div>
               <!-- 剩余成本 -->
               <!-- <div class="surplus sub-item">
                 <h4 class="title">剩余成本</h4>
                 <div class="details">
-                  <span class="number">2000/元</span>
-                  <span class="account">账号100个</span>
+                  <span class="number">0元</span>
+                  <span class="account">账号0个</span>
                 </div>
               </div> -->
             </li>
             <li class="type page">
               <div class="all sub-item">
-                <h4 class="title">总成本</h4>
-                <p class="number">2000/元</p>
+                <h4 class="title">页游专区</h4>
+                <p class="number">0个</p>
                 <div class="details">
-                  <span class="recovery">收购账号100个</span>
-                  <span class="return">找回账号100个</span>
+                  <span class="recovery">收购账号0个</span>
+                  <span class="return">找回账号0个</span>
                 </div>
               </div>
               <!-- 剩余成本 -->
               <!-- <div class="surplus sub-item">
                 <h4 class="title">剩余成本</h4>
                 <div class="details">
-                  <span class="number">2000/元</span>
-                  <span class="account">账号100个</span>
+                  <span class="number">0元</span>
+                  <span class="account">账号0个</span>
                 </div>
               </div> -->
             </li>
@@ -108,10 +109,10 @@
           <div class="conditions clearfix">
             <h4 class="title">成本统计</h4>
             <!-- 专区 -->
-            <div class="select-box fs16">
+            <div class="select-box fs16 cr2">
               <div class="select-text">端游专区</div>
               <ul class="select-ul gameType" data-selected="0">
-                <li data-value="0">端游专区</li>
+                <li data-value="0" class="current">端游专区</li>
                 <li data-value="1">手游专区</li>
                 <li data-value="2">页游专区</li>
               </ul>
@@ -123,9 +124,10 @@
               <ul class="select-ul gameList" data-selected=""></ul>
               <i class="iconz icon-arrow-right cr2 fs20"></i>
             </div>
+            <!-- 账号状态 -->
             <ul class="account-status right" data-selected="0">
               <li data-value="0" class="status current">回收</li>
-              <li data-value="2" class="status">找回</li>
+              <li data-value="1" class="status">找回</li>
             </ul>
           </div>
           <!-- 柱状图 -->
@@ -141,10 +143,10 @@
                   <th>排名</th>
                   <th>游戏名字</th>
                   <th class="ratio">占比</th>
-                  <th>回收</th>
-                  <th>成本</th>
-                  <th>找回</th>
-                  <th>成本</th>
+                  <th>回收数量</th>
+                  <th>回收成本</th>
+                  <th>找回数量</th>
+                  <th>找回成本</th>
                 </tr>
               </thead>
               <tbody></tbody>
@@ -171,8 +173,9 @@
         <div class="ratio-box" title="{ratio}"></div>
       </td>
       <td>{recoveryNum}</td>
-      <td>{saleNum}</td>
+      <td>{recoveryCost}</td>
       <td>{returnNum}</td>
+      <td>{returnCost}</td>
     </tr>
   </script>
 

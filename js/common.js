@@ -130,3 +130,4 @@ function liSelected(liDom) {
 function showRecordsNum(el, num) {
   el.text(num);
 }
+
