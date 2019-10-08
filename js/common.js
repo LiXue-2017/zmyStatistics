@@ -131,3 +131,14 @@ function showRecordsNum(el, num) {
   el.text(num);
 }
 
+function isShowSlectUl(showBox, speed) {
+  if (showBox.is(':visible')) {
+    showBox.slideUp(speed);
+    showBox.parent('.select-box').removeClass('focus');
+    showBox.siblings('.iconz').removeClass('icon-arrow-up').addClass('icon-arrow-down');
+  } else {
+    showBox.slideDown(speed);
+    showBox.parent('.select-box').addClass('focus');
+    showBox.siblings('.iconz').removeClass('icon-arrow-down').addClass('icon-arrow-up');
+  }
+}

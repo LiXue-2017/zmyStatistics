@@ -128,13 +128,24 @@ article
         border: 3px solid #f5f5f5
         margin-bottom: 14px
         .conditions
+          display: flex
           .title
+            flex: 0 0 140px
             display: inline-block
             vertical-align: middle
             color: #2d92b3
             font-size: 25px
-          .select-box
-            @include selectBox(136px, 30px, #acafb0, #29718c, #6bb7cc)       
+          .games-search
+            flex: 2
+            display: flex
+            .item
+              margin-right: 12px
+              .cap
+                font-size: 16px
+                color: #999
+                line-height: 33px
+              .select-box
+                @include selectBox(136px, 30px, #acafb0, #29718c, #6bb7cc)       
           .account-status
             .status
               display: inline-block

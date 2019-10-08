@@ -18,10 +18,10 @@ $(function () {
   
   // 下拉框点击事件  
   $('.main .select-box .select-text').click(function (e) {
-    showSlectBottom($(this).parent(), $(this).siblings('i'), 200);
+    isShowSlectUl($(this).siblings('.select-ul'), 200);
   });
   $('.main .select-box .select-ul').on('click', 'li', function () {
-    showSlectBottom($(this).parents('.select-box'), $(this).parent().siblings('i'), 200);
+    isShowSlectUl($(this).parent('.select-ul'), 200);
     liChangeStyle($(this));
     // 数据类型
     if($(this).parent().hasClass('dataType')) {

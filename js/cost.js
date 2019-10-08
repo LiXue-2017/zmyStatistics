@@ -28,8 +28,7 @@ $(function () {
     liChangeStyle($(this));
     // 选择专区
     if ($(this).parent().hasClass('gameType')) {
-      getGameList(token, $(this).attr('data-value'), $('.content .cost-statistics .gameList'), false);
-      getData();
+      getGameList(token, $(this).attr('data-value'), $('.content .cost-statistics .gameList'), getData, emptyData);
     }
     // 选择游戏
     if ($(this).parent().hasClass('gameList')) {
@@ -45,10 +44,7 @@ $(function () {
   });
 
   // 获取游戏分类
-  getGameList(token, gameDuan, $('.content .chapter .gameList'), false);
-
-  // 获取 账号的数据统计
-  getData();
+  getGameList(token, gameDuan, $('.content .chapter .gameList'), getData, emptyData);
 
   // 点击搜索
   $('.content .summary #btn-search').click(function () {
@@ -183,7 +179,7 @@ $(function () {
     var stime = $("#sDate").val();
     var etime = $("#eDate").val();
     // 专区
-    var gameArea = parseInt($('.content .cost-statistics .gameType').attr('data-selected'));
+    var gameArea = parseInt($('.content .account-statistics .game-type').attr('data-selected'));
     var gameId = $('.content .cost-statistics .gameList').attr('data-selected');
     // 账号状态
     var gameStatus = parseInt($('.content .cost-statistics .account-status').attr('data-selected'));
@@ -217,14 +213,9 @@ $(function () {
         var footDom = $('.content .account-statistics');
         var body = data.param.body;
         var foot = data.param.foot.left;
-         
-        // 清空之前数据
-        barOption.series[0].data = [];
-        barOption.xAxis[0].data = [];
 
-        footDom.find('.data tbody').empty();
-        pieOption.series[0].data = [];
-        pieOption.legend.data = [];
+        // 清空之前数据
+        emptyData();
 
         // 头部
         if (head) {
@@ -241,7 +232,7 @@ $(function () {
           headDom.find('.hand .recovery').text('回收' + head.shou.rec + '个');
           headDom.find('.hand .return').text('找回' + head.shou.retr + '个');
           // 页游
-          if(head.ye != '') {
+          if (head.ye != '') {
             headDom.find('.page .number').text(head.shou.all + '个');
             headDom.find('.page .recovery').text('回收' + head.shou.rec + '个');
             headDom.find('.page .return').text('找回' + head.shou.retr + '个');
@@ -286,6 +277,17 @@ $(function () {
         }
       }
     }, 'json');
+  }
+
+  // 清空页面数据
+  function emptyData() {
+    barOption.series[0].data = [];
+    barOption.xAxis[0].data = [];
+
+    $('.content .account-statistics .data tbody .data tbody').empty();
+    pieOption.series[0].data = [];
+    pieOption.legend.data = [];
+
   }
 
 

@@ -124,3 +124,24 @@
         (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) + ":" +
         (date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds());
     }
+
+
+    // 获取本月第一天
+    function currentMonthFirst () {
+      var date = new Date();
+      date.setDate(1);
+      var year = date.getFullYear();
+      var month = date.getMonth();
+      var day = date.getDate();
+      var date2 = new Date(year, month, day, 0);
+      return date2;
+    }
+
+    // 获取本月最后一天
+    function currentMonthLast() {
+      var date = new Date();
+      var date2 = new Date(date.getFullYear(), date.getMonth() + 1, date.getDate());
+      date2.setDate(0);
+      date = new Date(date.getFullYear(), date.getMonth(), date2.getDate(), 0);
+      return date;
+    }

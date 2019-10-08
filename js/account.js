@@ -26,7 +26,7 @@ $(function () {
     liChangeStyle($(this));
     // 选择专区
     if ($(this).parent().hasClass('gameType')) {
-      getGameList(token, $(this).attr('data-value'), $('.content .chapter .gameList'), false);
+      getGameList(token, $(this).attr('data-value'), $('.content .chapter .gameList'), getAccountData, emptyData);
     }
     // 选择游戏
     if ($(this).parent().hasClass('gameList')) {
@@ -43,10 +43,7 @@ $(function () {
   });
 
   // 获取游戏分类
-  getGameList(token, gameDuan, $('.content .chapter .gameList'), false);
-
-  // 获取 账号的数据统计
-  getAccountData();
+  getGameList(token, gameDuan, $('.content .chapter .gameList'), getAccountData, emptyData);
 
   // 点击搜索
   $('.content .summary #btn-search').click(function () {
@@ -54,8 +51,8 @@ $(function () {
   });
 
   // 初始化柱状图
-  var chartColumn = echarts.init($('.content .time-statistics .chart')[0]);
-  var chartColumnOption = {
+  var chartBar = echarts.init($('.content .time-statistics .chart')[0]);
+  var barOption = {
     color: {
       type: 'linear',
       x: 0,
@@ -173,7 +170,7 @@ $(function () {
     var stime = $("#sDate").val();
     var etime = $("#eDate").val();
     // 专区
-    var gameType = parseInt($('.content .time-statistics .gameType').attr('data-selected'));
+    var gameType = parseInt($('.content .account-statistics .game-type').attr('data-selected'));
     var gameId = $('.content .time-statistics .gameList').attr('data-selected');
     // 账号状态
     var gameStatus = parseInt($('.content .time-statistics .account-status').attr('data-selected'));
@@ -206,6 +203,10 @@ $(function () {
         var headDom = $('.content .summary .account-type');
         var body = data.param.body;
         var foot = data.param.foot.left;
+
+        // 清空之前数据
+        emptyData();
+
         // 头部
         if (head) {
           // 全部
@@ -224,53 +225,62 @@ $(function () {
           headDom.find('.hand .recovery').text('回收' + head.shou.rec + '个');
           headDom.find('.hand .return').text('找回' + head.shou.retr + '个');
           //页游
-          if(head.ye != '') {
+          if (head.ye != '') {
             headDom.find('.page .number').text(page.all + '/个');
             headDom.find('.page .sale').text('售出' + page.sell + '个');
             headDom.find('.page .recovery').text('回收' + page.rec + '个');
             headDom.find('.page .return').text('找回' + page.retr + '个');
           }
-          
+
         }
         // 时间统计
         if (body) {
-          body.forEach(element => {
-            headDom.find('.all .number').text(head.quan.all + '/个');
+          body.forEach(item => {
+            barOption.xAxis[0].data.push(item.dtime);
+            barOption.series[0].data.push(item.num);
           });
-          chartColumn.setOption(chartColumnOption);
+          chartBar.setOption(barOption);
         }
         // 账号统计
         if (foot) {
           var foodDom = $('.content .account-statistics');
-          // 清空之前数据
-          foodDom.find('.data tbody').empty();
-          chartPieOption.series[0].data = [];
-          chartPieOption.legend.data = [];
-          foot.forEach((element, index) => {
-            var recoveryNum = element.rec ? element.rec : 0;
-            var saleNum = element.sell ? element.sell : 0;
-            var returnNum = element.retr ? element.retr : 0;
+          foot.forEach((item, index) => {
+            var recoveryNum = item.rec ? item.rec : 0;
+            var saleNum = item.sell ? item.sell : 0;
+            var returnNum = item.retr ? item.retr : 0;
             var htmStr = getTemplate('#dataRow', {
               rank: index + 1,
-              gameName: element.yx_name,
-              ratio: element.zb + '%',
+              gameName: item.yx_name,
+              ratio: item.zb + '%',
               recoveryNum: recoveryNum,
               saleNum: saleNum,
               returnNum: returnNum
             });
             foodDom.find('.data tbody').append(htmStr);
             foodDom.find('.data tbody tr:nth-child(' + (index + 1) + ') .ratio .ratio-box').animate({
-              width: element.zb + '%'
+              width: item.zb + '%'
             }, 500);
             chartPieOption.series[0].data.push({
-              name: element.yx_name,
-              value: element.sum
+              name: item.yx_name,
+              value: item.sum
             });
-            chartPieOption.legend.data.push(element.yx_name);
+            chartPieOption.legend.data.push(item.yx_name);
           });
           chartPie.setOption(chartPieOption);
         }
       }
     }, 'json');
   }
+
+  // 清空页面数据
+  function emptyData() {
+    barOption.xAxis[0].data = [];
+    barOption.series[0].data = [];
+
+    $('.content .account-statistics .data tbody').empty();
+    chartPieOption.series[0].data = [];
+    chartPieOption.legend.data = [];
+
+  }
+
 });

@@ -71,23 +71,31 @@
         <section class="chapter time-statistics">
           <div class="conditions clearfix">
             <h4 class="title">时间统计</h4>
-            <!-- 专区 -->
-            <div class="select-box fs16 cr2">
-              <div class="select-text">端游专区</div>
-              <ul class="select-ul gameType" data-selected="0">
-                <li class="current" data-value="0">端游专区</li>
-                <li data-value="1">手游专区</li>
-                <li data-value="2">页游专区</li>
-              </ul>
-              <i class="iconz icon-arrow-right cr2 fs20"></i>
-            </div>
-            <!-- 游戏 -->
-            <div class="select-box fs16 cr2">
-              <div class="select-text"></div>
-              <ul class="select-ul gameList" data-selected=""></ul>
-              <i class="iconz icon-arrow-right cr2 fs20"></i>
-            </div>
-            <ul class="account-status right" data-selected="0">
+            <ul class="games-search">
+              <!-- 专区 -->
+              <li class="item">
+                <span class="cap">专区：</span>
+                <div class="select-box fs16 cr2">
+                  <div class="select-text">端游专区</div>
+                  <ul class="select-ul gameArea" data-selected="0">
+                    <li class="current" data-value="0">端游专区</li>
+                    <li data-value="1">手游专区</li>
+                    <li data-value="2">页游专区</li>
+                  </ul>
+                  <i class="iconz icon-arrow-right cr2 fs20"></i>
+                </div>
+              </li>
+              <!-- 游戏名字 -->
+              <li class="item">
+                <span class="cap">游戏名字：</span>
+                <div class="select-box fs16 cr2">
+                  <div class="select-text"></div>
+                  <ul class="select-ul gameList" data-selected=""></ul>
+                  <i class="iconz icon-arrow-right cr2 fs20"></i>
+                </div>
+              </li>
+            </ul>            
+            <ul class="account-status" data-selected="0">
               <li data-value="0" class="status current">回收</li>
               <li data-value="1" class="status">出售</li>
               <li data-value="2" class="status">找回</li>
