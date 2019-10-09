@@ -12,19 +12,21 @@ $(function () {
   menuHover();
   // 获取交易客服
   getDealkF(token, $('.main .head .kfList'), true);
-
   getData();
-  
+
   // 初始化时间选择器
   $('#sDate').dcalendarpicker();
   $('#eDate').dcalendarpicker();
+  // 时间默认当月第一天到当月最后一天
+  $("#sDate").val(currentMonthFirst());
+  $("#eDate").val(currentMonthLast());
 
   // 下拉框点击事件
   $('.main .select-box .select-text').click(function (e) {
-    showSlectBottom($(this).parent(), $(this).siblings('i'), 200);
+    isShowSlectUl($(this).siblings('.select-ul'), 200);
   });
   $('.main .select-box .select-ul').on('click', 'li', function () {
-    showSlectBottom($(this).parents('.select-box'), $(this).parent().siblings('i'), 200);
+    isShowSlectUl($(this).parent(), 200);
     liChangeStyle($(this));
     getData();
   });
@@ -92,14 +94,18 @@ $(function () {
         color: '#00bfb4',
         fontSize: 22
       },
-      backgroundColor: '#f8f8f8',
       borderWidth: '1px',
       borderColor: '#dfdfdf',
-      padding: [28, 26]
+      padding: [28, 26, 0]
+    },
+    grid: {
+      left: 100,
+      top: 100,
+      borderWidth: 1
     },
     tooltip: {
       trigger: 'axis',
-      formatter: "{a} <br/>{b}: {c} ({d}%)"
+      formatter: "{a} <br/>{b}：{c}个"
     },
     legend: {
       type: 'scroll',
@@ -107,16 +113,17 @@ $(function () {
       itemGap: 10,
       data: []
     },
-    xAxis: {
+    xAxis: [{
+      name: '日期',
       type: 'category',
       data: []
-    },
-    yAxis: {
-      type: 'value',
-      data: []
-    },
+    }],
+    yAxis: [{
+      name: '交易量/个',
+      type: 'value'
+    }],
     series: [{
-      name: '',
+      name: '个人交易量',
       type: 'bar',
       data: []
     }]
@@ -128,25 +135,29 @@ $(function () {
         color: '#00bfb4',
         fontSize: 22
       },
-      backgroundColor: '#f8f8f8',
       borderWidth: '1px',
       borderColor: '#dfdfdf',
-      padding: [28, 26]
+      padding: [28, 26, 0]
+    },
+    grid: {
+      left: 100,
+      top: 100,
+      borderWidth: 1
     },
     tooltip: {
-      trigger: 'axis'
+      trigger: 'axis',
+      formatter: '{a} <br/> {b}：{c}元'
     },
     xAxis: {
+      name: '日期',
       type: 'category',
       boundaryGap: true,
       data: []
     },
-    yAxis: {
-      type: 'value',
-      axisLabel: {
-        formatter: '{value}'
-      }
-    },
+    yAxis: [{
+      name: '利润/元',
+      type: 'value'
+    }],
     series: [{
       name: '账号利润统计',
       type: 'line',
@@ -170,6 +181,12 @@ $(function () {
       }
     }]
   }
+
+  // 初始化图表
+  var chartPie1 = echarts.init($('.main .statistics .profit-price')[0]);
+  var chartBar = echarts.init($('.main .statistics .person-volume')[0]);
+  var chartPie2 = echarts.init($('.main .statistics .game-type')[0]);
+  var chartLine = echarts.init($('.main .statistics .profit')[0]);
 
   // 获取页面数据
   function getData() {
@@ -203,12 +220,15 @@ $(function () {
         var personVolume = data.param.body;
         var gameType = data.param.left;
         var profit = data.param.right;
+
+        // 清空
+        emptyData();
+
         // 利润价格占比
         if (profitPrice) {
           pieOption.title.text = '利润价格占比';
           pieOption.series[0].name = '利润价格占比';
-          pieOption.legend.data = [];
-          pieOption.series[0].data = [];
+
           pieOption.legend.data = ['0~500元', '500~1000元', '1000元以上'];
           pieOption.series[0].data.push({
             name: '0~500元',
@@ -222,19 +242,17 @@ $(function () {
             name: '1000元以上',
             value: profitPrice.d
           })
-          // 初始化饼图
-          var chartPie = echarts.init($('.main .statistics .profit-price')[0]);
-          chartPie.setOption(pieOption);
+
+          chartPie1.setOption(pieOption);
         }
 
         // 个人交易量
         if (personVolume) {
           personVolume.forEach(function (item) {
-            barOption.xAxis.data.push(item.dtime);
-            barOption.yAxis.data.push(item.num);
+            barOption.xAxis[0].data.push(item.dtime);
             barOption.series[0].data.push(item.num);
           });
-          var chartBar = echarts.init($('.main .statistics .person-volume')[0]);
+
           chartBar.setOption(barOption);
         }
         // 游戏类型占比
@@ -251,23 +269,37 @@ $(function () {
               value: item.num
             });
           });
-          // 初始化饼图
-          var chartPie = echarts.init($('.main .statistics .game-type')[0]);
-          chartPie.setOption(pieOption);
+
+          chartPie2.setOption(pieOption);
         }
 
         // 账号利润统计
         if (profit) {
           profit.forEach(function (item) {
             lineOption.xAxis.data.push(item.dtime);
-            // lineOption.yAxis.data.push(item.profit);
             lineOption.series[0].data.push(item.profit);
           });
-          // 初始化折线图
-          var chartLine = echarts.init($('.main .statistics .profit')[0]);
+
           chartLine.setOption(lineOption);
         }
       }
     }, 'json');
   }
+
+  // 清空页面数据
+  function emptyData() {
+    pieOption.legend.data = [];
+    pieOption.series[0].data = [];
+    chartPie1.setOption(pieOption);
+    chartPie2.setOption(pieOption);
+
+    barOption.xAxis[0].data = [];
+    barOption.series[0].data = [];
+    chartBar.setOption(barOption);
+
+    lineOption.xAxis.data = [];
+    lineOption.series[0].data = [];
+    chartLine.setOption(lineOption);
+  }
+
 });

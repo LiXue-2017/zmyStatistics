@@ -16,6 +16,9 @@ $(function () {
   // 初始化时间选择器
   $('#sDate').dcalendarpicker();
   $('#eDate').dcalendarpicker();
+  // 时间默认当月第一天到当月最后一天
+  $("#sDate").val(currentMonthFirst());
+  $("#eDate").val(currentMonthLast());
 
   // 下拉框点击事件  
   $('.content .select-box .select-text').click(function (e) {
@@ -25,7 +28,7 @@ $(function () {
     showSlectRight($(this).parents('.select-box'), $(this).parent().siblings('i'), 200);
     liChangeStyle($(this));
     // 选择专区
-    if ($(this).parent().hasClass('gameType')) {
+    if ($(this).parent().hasClass('gameArea')) {
       getGameList(token, $(this).attr('data-value'), $('.content .chapter .gameList'), getAccountData, emptyData);
     }
     // 选择游戏

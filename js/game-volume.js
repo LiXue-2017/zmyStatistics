@@ -15,16 +15,19 @@ $(function () {
   // 初始化时间选择器
   $('#sDate').dcalendarpicker();
   $('#eDate').dcalendarpicker();
+  // 时间默认当月第一天到当月最后一天
+  $("#sDate").val(currentMonthFirst());
+  $("#eDate").val(currentMonthLast());
 
   // 获取游戏分类
   getGameList(token, gameDuan, $('.main .statistics .gameList'), getData, emptyData);
 
   // 下拉框点击事件
   $('.main .select-box .select-text').click(function (e) {
-    showSlectBottom($(this).parent(), $(this).siblings('i'), 200);
+    isShowSlectUl($(this).siblings('.select-ul'), 200);
   });
   $('.main .select-box .select-ul').on('click', 'li', function () {
-    showSlectBottom($(this).parents('.select-box'), $(this).parent().siblings('i'), 200);
+    isShowSlectUl($(this).parent(), 200);
     liChangeStyle($(this));
     // 选择专区
     if ($(this).parent().hasClass('gameType')) {
@@ -53,20 +56,26 @@ $(function () {
         color: '#00bfb4',
         fontSize: 22
       },
-      backgroundColor: '#f8f8f8',
       borderWidth: '1px',
       borderColor: '#dfdfdf',
-      padding: [28, 26]
+      padding: [28, 26, 0]
+    },
+    grid: {
+      left: 100,
+      top: 100,
+      borderWidth: 1
     },
     tooltip: {
       trigger: 'axis'
     },
     xAxis: {
+      name: '日期',
       type: 'category',
       boundaryGap: true,
       data: []
     },
     yAxis: {
+      name: '游戏成交量/个',
       type: 'value',
       axisLabel: {
         formatter: '{value}'
@@ -96,40 +105,6 @@ $(function () {
     }]
   }
   var chartLine = echarts.init($('.main .volume .statistics .chart')[0]);
-
-  // 获取游戏分类
-  function getGames(gameArea) {
-    var params = {
-      a: 'get_yxlist',
-      token: token,
-      ctype: gameArea
-    }
-
-    $.post(HTTP_SERVERNAME + '/worksystem/statistical.php', params, function (data, status) {
-      var code = data.code;
-      checkToken(code);
-      if (code == 0) {
-        var list = data.param;
-        var listDom = $('.main .volume .gameList');
-        if (list && list.length > 0) {
-          var htmlStr = '';
-          list.forEach(function (val, index) {
-            htmlStr += getTemplate('#gameRow', {
-              gameId: val.yx_id,
-              gameName: val.yx_name
-            });
-          });
-          listDom.html(htmlStr);
-          // 默认选中第一个
-          liSelected(listDom.children('li').first());
-        } else {
-          resetSelect(listDom, '', '');
-          listDom.empty();
-        }
-        getData();
-      }
-    }, 'json');
-  }
 
   // 获取页面数据
   function getData() {
@@ -165,7 +140,7 @@ $(function () {
         var gameArea = data.param.head;
         var gameVolume = data.param.body;
         var rankData = data.param.foot;
-   
+
         emptyData();
 
         // 专区统计
@@ -204,11 +179,11 @@ $(function () {
     }, 'json');
   }
 
-// 清空页面数据
-function emptyData() {
-  lineOption.xAxis.data = [];
-  lineOption.series[0].data = [];
-  chartLine.setOption(lineOption);
-}
+  // 清空页面数据
+  function emptyData() {
+    lineOption.xAxis.data = [];
+    lineOption.series[0].data = [];
+    chartLine.setOption(lineOption);
+  }
 
 });

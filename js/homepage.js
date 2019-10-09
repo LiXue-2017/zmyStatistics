@@ -12,10 +12,13 @@ $(function () {
   // 初始化时间选择器
   $('#sDate').dcalendarpicker();
   $('#eDate').dcalendarpicker();
+  // 时间默认当月第一天到当月最后一天
+  $("#sDate").val(currentMonthFirst());
+  $("#eDate").val(currentMonthLast());
 
   // 首次获取数据
   getData();
-  
+
   // 下拉框点击事件  
   $('.main .select-box .select-text').click(function (e) {
     isShowSlectUl($(this).siblings('.select-ul'), 200);
@@ -23,8 +26,10 @@ $(function () {
   $('.main .select-box .select-ul').on('click', 'li', function () {
     isShowSlectUl($(this).parent('.select-ul'), 200);
     liChangeStyle($(this));
-    // 数据类型
-    if($(this).parent().hasClass('dataType')) {
+    // 人数类型
+    if ($(this).parent().hasClass('dataType')) {
+      barOption.yAxis.name = $(this).text() + '/个';
+      barOption.series[0].name = $(this).text();
       getData();
     }
   });
@@ -44,10 +49,10 @@ $(function () {
       y2: 1,
       colorStops: [{
         offset: 0,
-        color: '#69d7d2' // 0% 处的颜色
+        color: '#36bbb5' // 0% 处的颜色
       }, {
         offset: 0,
-        color: '#36bbb5' // 100% 处的颜色
+        color: '#69d7d2' // 100% 处的颜色
       }],
       globalCoord: false // 缺省为 false
     },
@@ -57,12 +62,7 @@ $(function () {
     },
     tooltip: {
       trigger: 'axis',
-      formatter: "{b}: <br/> {c}"
-    },
-    legend: {
-      type: 'scroll',
-      bottom: 0,
-      itemGap: 10
+      formatter: '{a}<br/>{b}：{c}个'
     },
     xAxis: {
       name: '时间',
@@ -70,25 +70,21 @@ $(function () {
       data: []
     },
     yAxis: {
-      name: '人数',
+      name: '新增人数/个',
       type: 'value'
     },
     series: [{
-      name: '',
+      name: '新增人数',
       type: 'bar',
-      barWidth: 20,
+      barWidth: 32,
       barMinHeight: 1,
       itemStyle: {
-        barBorderRadius: [5, 5, 0, 0],
-        shadowBlur: 5,
-        shadowOffsetX: 0,
-        shadowOffsetY: 5,
-        shadowColor: 'rgba(17, 74, 123, 0.75)'
+        barBorderRadius: [7, 7, 0, 0]
       },
       data: []
     }]
   };
-
+  
   var pieOption = {
     tooltip: {
       trigger: 'item',
@@ -174,12 +170,8 @@ $(function () {
         var body = data.param.body;
         var foot = data.param.foot;
         // 清空
-        barOption.xAxis.data = [];
-        barOption.series[0].data = [];
+        emptyData();
 
-        pieOption.legend.data = [];
-        pieOption.series[0].data = [];
-        1
         // 利润价格占比
         if (head) {
           $('.content .player-data .new-add .number').text(head.xz);
@@ -188,7 +180,7 @@ $(function () {
           $('.content .player-data .sign-in .number').text(head.dl);
         }
 
-        // 个人交易量
+        // 人数统计
         if (body) {
           body.forEach(function (item) {
             barOption.xAxis.data.push(item.dtime);
@@ -196,7 +188,7 @@ $(function () {
           });
           chartBar.setOption(barOption);
         }
-        // 游戏类型占比
+        // 人数占比
         if (foot) {
           foot.forEach(item => {
             pieOption.legend.data.push(item.name);
@@ -205,11 +197,24 @@ $(function () {
               value: item.num
             });
           });
-
           chartPie.setOption(pieOption);
         }
 
       }
     }, 'json');
   }
+
+  // 清空页面数据
+  function emptyData() {
+    barOption.xAxis.data = [];
+    barOption.series[0].data = [];
+    chartBar.setOption(barOption);
+
+    pieOption.legend.data = [];
+    pieOption.series[0].data = [];
+    chartPie.setOption(pieOption);
+
+    $('.main .pay-statis .data-table .data tbody').empty();
+  }
+
 });

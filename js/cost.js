@@ -18,6 +18,9 @@ $(function () {
   // 初始化时间选择器
   $('#sDate').dcalendarpicker();
   $('#eDate').dcalendarpicker();
+  // 时间默认当月第一天到当月最后一天
+  $("#sDate").val(currentMonthFirst());
+  $("#eDate").val(currentMonthLast());
 
   // 下拉框点击事件  
   $('.content .select-box .select-text').click(function (e) {
@@ -27,7 +30,7 @@ $(function () {
     showSlectRight($(this).parents('.select-box'), $(this).parent().siblings('i'), 200);
     liChangeStyle($(this));
     // 选择专区
-    if ($(this).parent().hasClass('gameType')) {
+    if ($(this).parent().hasClass('gameArea')) {
       getGameList(token, $(this).attr('data-value'), $('.content .cost-statistics .gameList'), getData, emptyData);
     }
     // 选择游戏
@@ -48,6 +51,13 @@ $(function () {
 
   // 点击搜索
   $('.content .summary #btn-search').click(function () {
+    getData();
+  });
+
+  // 点击选择游戏专区
+  $('.chapter.account-statistics .game-area .area').click(function () {
+    $(this).addClass('current').siblings().removeClass('current');
+    $(this).parent().attr('data-selected', $(this).attr('data-value'));
     getData();
   });
 
@@ -179,7 +189,7 @@ $(function () {
     var stime = $("#sDate").val();
     var etime = $("#eDate").val();
     // 专区
-    var gameArea = parseInt($('.content .account-statistics .game-type').attr('data-selected'));
+    var gameArea = parseInt($('.content .account-statistics .game-area').attr('data-selected'));
     var gameId = $('.content .cost-statistics .gameList').attr('data-selected');
     // 账号状态
     var gameStatus = parseInt($('.content .cost-statistics .account-status').attr('data-selected'));
@@ -220,20 +230,20 @@ $(function () {
         // 头部
         if (head) {
           // 全部
-          headDom.find('.cost .number').text(head.quan.all + '个');
+          headDom.find('.cost .number').text(head.quan.all + '元');
           headDom.find('.cost .recovery').text('回收' + head.quan.rec + '个');
           headDom.find('.cost .return').text('找回' + head.quan.retr + '个');
           // 端游
-          headDom.find('.duan .number').text(head.duan.all + '个');
+          headDom.find('.duan .number').text(head.duan.all + '元');
           headDom.find('.duan .recovery').text('回收' + head.duan.rec + '个');
           headDom.find('.duan .return').text('找回' + head.duan.retr + '个');
           //手游
-          headDom.find('.hand .number').text(head.shou.all + '个');
+          headDom.find('.hand .number').text(head.shou.all + '元');
           headDom.find('.hand .recovery').text('回收' + head.shou.rec + '个');
           headDom.find('.hand .return').text('找回' + head.shou.retr + '个');
           // 页游
           if (head.ye != '') {
-            headDom.find('.page .number').text(head.shou.all + '个');
+            headDom.find('.page .number').text(head.shou.all + '元');
             headDom.find('.page .recovery').text('回收' + head.shou.rec + '个');
             headDom.find('.page .return').text('找回' + head.shou.retr + '个');
           }
@@ -258,10 +268,10 @@ $(function () {
               rank: index + 1,
               gameName: element.yx_name,
               ratio: element.zb + '%',
-              recoveryNum: recoveryNum,
-              recoveryCost: recoveryCost,
-              returnNum: returnNum,
-              returnCost: returnCost
+              recoveryNum: recoveryNum + '个',
+              recoveryCost: recoveryCost + '元',
+              returnNum: returnNum + '个',
+              returnCost: returnCost + '元'
             });
             footDom.find('.data tbody').append(htmStr);
             footDom.find('.data tbody tr:nth-child(' + (index + 1) + ') .ratio .ratio-box').animate({
@@ -284,7 +294,7 @@ $(function () {
     barOption.series[0].data = [];
     barOption.xAxis[0].data = [];
 
-    $('.content .account-statistics .data tbody .data tbody').empty();
+    $('.content .account-statistics .data tbody').empty();
     pieOption.series[0].data = [];
     pieOption.legend.data = [];
 

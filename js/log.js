@@ -14,6 +14,9 @@ $(function () {
   // 初始化时间选择器
   $('#sDate').dcalendarpicker();
   $('#eDate').dcalendarpicker();
+  // 时间默认当月第一天到当月最后一天
+  $("#sDate").val(currentMonthFirst());
+  $("#eDate").val(currentMonthLast());
 
   // 获取所有客服
   getAllKf();
@@ -42,7 +45,12 @@ $(function () {
   $('.main .infos .icon-refresh').click(function () {
     // 重置搜索条件
     $('.main .infos')[0].reset();
-    resetValue($('.search-list .select-ul[data-event=getKF], .search-list .select-ul[data-event=getGames]'), $('.search-list .select-ul[data-event=getPrice]'));
+    resetSelect($('.search-list .kfList'), '全部', '0');
+    resetSelect($('.search-list .logType, .search-list .goodStatus'), '全部', '-999');
+    // 时间默认当月第一天到当月最后一天
+    $("#sDate").val(currentMonthFirst());
+    $("#eDate").val(currentMonthLast());
+
     var recordParams = getRequestParam();
     getDataList(recordParams);
   });
@@ -72,6 +80,7 @@ $(function () {
       token: token,
       page: 1,
     }
+
     var sTime = $("#sDate").val();
     var eTime = $("#eDate").val();
     var kfId = parseInt($('.search-list .kfList').attr('data-selected'));
@@ -79,19 +88,11 @@ $(function () {
     var goodStatus = parseInt($('.search-list .goodStatus').attr('data-selected'));
     var goodId = $.trim($('#good-id').val());
     var gameAccount = $.trim($('#game-account').val());
-    
-    params.cid = kfId,
-    params.ltype = logType,
-    params.gtype = goodStatus;
-    // 时间默认当月第一天到当月最后一天
-    var firstDay = currentMonthFirst();
-    firstDay = parseInt(firstDay.getTime() / 1000);
-    params.stime = firstDay;
-    var lastDay = currentMonthLast();
-    lastDay = parseInt(lastDay.getTime() / 1000) + 24 * 60 * 60;
-    params.etime = lastDay;
 
-    
+    params.cid = kfId,
+      params.ltype = logType,
+      params.gtype = goodStatus;
+
     if (sTime != '') {
       sTime = new Date(sTime);
       sTime = parseInt(sTime.getTime() / 1000);
@@ -104,7 +105,7 @@ $(function () {
     }
 
     if (goodId != '') {
-      params.gid = goodId;
+      params.gid = parseInt(goodId);
     }
     if (gameAccount != '') {
       params.acc = gameAccount;
@@ -144,10 +145,10 @@ $(function () {
         }
         // 商品状态
         var status = data.param.gtype;
-        if(status && $('.search-list .goodStatus').children().length == 0 ) {
+        if (status && $('.search-list .goodStatus').children().length == 0) {
           // $('.search-list .goodStatus').empty();
-          var htmlStr = '<li class="current" data-value="0">全部</li>';
-          for(var i in status) {
+          var htmlStr = '<li class="current" data-value="-999">全部</li>';
+          for (var i in status) {
             htmlStr += getTemplate('#typeRow', {
               id: i,
               value: status[i]
@@ -159,10 +160,10 @@ $(function () {
         //日志类型 
         var logType = data.param.ltype;
         console.log($('.search-list .logType').children().length == 0);
-        if(logType && $('.search-list .logType').children().length == 0 ) {
+        if (logType && $('.search-list .logType').children().length == 0) {
           // $('.search-list .logType').empty();
-          var htmlStr = '<li class="current" data-value="0">全部</li>';
-          for(var i in logType) {
+          var htmlStr = '<li class="current" data-value="-999">全部</li>';
+          for (var i in logType) {
             htmlStr += getTemplate('#typeRow', {
               id: i,
               value: logType[i]
@@ -171,7 +172,7 @@ $(function () {
           $('.search-list .logType').append(htmlStr);
 
         }
-        
+
       }
       if (code == 400) {
         alert(data.msg);
@@ -200,7 +201,7 @@ $(function () {
             });
           });
           $('.search-list .kfList').append(htmlStr);
-          
+
         }
       }
     }, 'json');

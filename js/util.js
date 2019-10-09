@@ -125,6 +125,14 @@
         (date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds());
     }
 
+    function timeToDay(timeInt) {
+      var timeInt = parseInt(timeInt);
+      var date = new Date(timeInt * 1000);
+      return date.getFullYear() + "/" +
+        (date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" +
+        (date.getDate() < 10 ? "0" + date.getDate() : date.getDate());
+    }
+
 
     // 获取本月第一天
     function currentMonthFirst () {
@@ -134,6 +142,8 @@
       var month = date.getMonth();
       var day = date.getDate();
       var date2 = new Date(year, month, day, 0);
+      date2 = parseInt(date2.getTime() / 1000);
+      date2 = timeToDay(date2);
       return date2;
     }
 
@@ -143,5 +153,7 @@
       var date2 = new Date(date.getFullYear(), date.getMonth() + 1, date.getDate());
       date2.setDate(0);
       date = new Date(date.getFullYear(), date.getMonth(), date2.getDate(), 0);
+      date = parseInt(date.getTime() / 1000);
+      date = timeToDay(date);
       return date;
     }

@@ -16,16 +16,19 @@ $(function () {
   // 初始化时间选择器
   $('#sDate').dcalendarpicker();
   $('#eDate').dcalendarpicker();
+  // 时间默认当月第一天到当月最后一天
+  $("#sDate").val(currentMonthFirst());
+  $("#eDate").val(currentMonthLast());
 
   // 获取游戏分类
   getGameList(token, gameDuan, $('.main .statistics .gameList'), getData, emptyData);
 
   // 下拉框点击事件  
   $('.main .select-box .select-text').click(function (e) {
-    showSlectBottom($(this).parent(), $(this).siblings('i'), 200);
+    isShowSlectUl($(this).siblings('.select-ul'), 200);
   });
   $('.main .select-box .select-ul').on('click', 'li', function () {
-    showSlectBottom($(this).parents('.select-box'), $(this).parent().siblings('i'), 200);
+    isShowSlectUl($(this).parent(), 200);
     liChangeStyle($(this));
     // 选择专区
     if ($(this).parent().hasClass('gameType')) {
@@ -50,8 +53,6 @@ $(function () {
     $(this).parent().attr('data-selected', $(this).attr('data-value'));
     getData();
   });
-
-
 
   // 点击选择 专区
   $('.main .pay-statis .data-table .game-type .type').click(function () {
@@ -132,22 +133,27 @@ $(function () {
       name: '利润占比',
       type: 'pie',
       radius: ['0', '60%'],
+      avoidLabelOverlap: true,
       label: {
         normal: {
           formatter: '{b|{b}：}{c}  {per|{d}%}  ',
           rich: {
             b: {
-              fontSize: 16,
-              lineHeight: 33
+              fontSize: 12,
+              // lineHeight: 38
             },
             per: {
               color: '#eee',
               backgroundColor: '#334455',
-              padding: [4, 4],
+              padding: [2, 4],
               borderRadius: 2
             }
-          }
-        }
+          },
+          // textStyle: {
+          //   fontSize: 6
+          // }
+        },
+        
       },
       labelLine: {
         normal: {
@@ -155,7 +161,7 @@ $(function () {
         },
         emphasis: {
           show: true
-        }
+        },
       },
       data: []
     }]
@@ -163,39 +169,6 @@ $(function () {
   // 初始化图表
   var chartBar = echarts.init($('.main .statistics .chart')[0]);
   var chartPie = echarts.init($('.main .pay-statis .stastics-ratio .chart')[0]);
-
-  // 获取游戏分类
-  function getGames(gameArea) {
-    var params = {
-      a: 'get_yxlist',
-      token: token,
-      ctype: gameArea
-    }
-
-    $.post(HTTP_SERVERNAME + '/worksystem/statistical.php', params, function (data, status) {
-      var code = data.code;
-      checkToken(code);
-      if (code == 0) {
-        var list = data.param;
-        var listDom = $('.main .statistics .gameList');
-        if (list && list.length > 0) {
-          var htmlStr = '';
-          list.forEach(function (val, index) {
-            htmlStr += getTemplate('#gameRow', {
-              gameId: val.yx_id,
-              gameName: val.yx_name
-            });
-          });
-          listDom.html(htmlStr);
-          // 默认选中第一个
-          liSelected(listDom.children('li').first());
-        } else {
-          resetSelect(listDom, '', '');
-          listDom.empty();
-        }
-      }
-    }, 'json');
-  }
 
   // 获取 页面 数据
   function getData() {
@@ -277,9 +250,9 @@ $(function () {
               rank: index + 1,
               gameName: item.yx_name,
               ratio: item.zb + '%',
-              income: income,
-              pay: payNum,
-              return: returnNum
+              income: income + '元',
+              pay: payNum + '元',
+              return: returnNum + '元'
             });
             dataDom.append(htmlStr);
             dataDom.find('tr:nth-child(' + (index + 1) + ') .ratio .ratio-box').animate({

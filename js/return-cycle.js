@@ -16,16 +16,19 @@ $(function () {
   // 初始化时间选择器
   $('#sDate').dcalendarpicker();
   $('#eDate').dcalendarpicker();
+  // 时间默认当月第一天到当月最后一天
+  $("#sDate").val(currentMonthFirst());
+  $("#eDate").val(currentMonthLast());
 
   // 获取游戏分类
   getGameList(token, gameDuan, $('.main .statistics .gameList'), getData, emptyData);
 
   // 下拉框点击事件  
   $('.main .select-box .select-text').click(function (e) {
-    showSlectBottom($(this).parent(), $(this).siblings('i'), 200);
+    isShowSlectUl($(this).siblings('.select-ul'), 200);
   });
   $('.main .select-box .select-ul').on('click', 'li', function () {
-    showSlectBottom($(this).parents('.select-box'), $(this).parent().siblings('i'), 200);
+    isShowSlectUl($(this).parent(), 200);
     liChangeStyle($(this));
     // 选择专区
     if ($(this).parent().hasClass('gameType')) {
@@ -77,17 +80,19 @@ $(function () {
       axisPointer: {
         type: 'shadow'
       },
-      formatter: "{b} <br/> {c} 天"
+      formatter: "{a}<br/>{b}：{c} 天"
     },
     xAxis: {
+      name: '日期',
       type: 'category',
       data: []
     },
     yAxis: {
+      name: '平均回报周期/天',
       type: 'value'
     },
     series: [{
-      name: '',
+      name: '平均回报周期',
       type: 'bar',
       barWidth: 20,
       barMinHeight: 1,
@@ -125,7 +130,7 @@ $(function () {
       radius: ['0', '60%'],
       label: {
         normal: {
-          formatter: '{b|{b}：}{c}  {per|{d}%}  ',
+          formatter: '{b|{b}：}{c}  {per|{d}%}',
           rich: {
             b: {
               fontSize: 16,
@@ -198,7 +203,7 @@ $(function () {
           $('.main .game-area .all .number').text(gameArea.quan.all + '天/账号');
           $('.main .game-area .duan .number').text(gameArea.duan.all + '天/账号');
           $('.main .game-area .hand .number').text(gameArea.shou.all + '天/账号');
-          if(gameArea.ye) {
+          if (gameArea.ye) {
             $('.main .game-area .page .number').text(gameArea.ye.all + '天/账号');
           }
         }
@@ -212,7 +217,7 @@ $(function () {
           chartBar.setOption(barOption);
         }
         if (returnData == -10000) {
-          chartPie.dispose();
+          emptyData();
         } else {
           returnData.forEach(function (item, index) {
             var recoveryNum = item.rec ? item.rec : 0;
@@ -222,9 +227,9 @@ $(function () {
               rank: index + 1,
               gameName: item.yx_name,
               ratio: item.zb + '%',
-              recoveryNum: recoveryNum,
-              saleNum: saleNum,
-              cycle: item.pj
+              recoveryNum: recoveryNum + '天',
+              saleNum: saleNum + '天',
+              cycle: item.pj + '天'
             });
             dataDom.append(htmlStr);
             dataDom.find('tr:nth-child(' + (index + 1) + ') .ratio .ratio-box').animate({

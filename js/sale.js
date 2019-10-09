@@ -18,13 +18,16 @@ $(function () {
   // 初始化时间选择器
   $('#sDate').dcalendarpicker();
   $('#eDate').dcalendarpicker();
+  // 时间默认当月第一天到当月最后一天
+  $("#sDate").val(currentMonthFirst());
+  $("#eDate").val(currentMonthLast());
 
   // 下拉框点击事件
   $('.content .select-box .select-text').click(function (e) {
-    showSlectBottom($(this).parent(), $(this).siblings('i'), 200);
+    isShowSlectUl($(this).siblings('.select-ul'), 200);
   });
   $('.content .select-box .select-ul').on('click', 'li', function () {
-    showSlectBottom($(this).parents('.select-box'), $(this).parent().siblings('i'), 200);
+    isShowSlectUl($(this).parent(), 200);
     liChangeStyle($(this));
     // 选择专区
     if ($(this).parent().hasClass('gameType')) {
@@ -188,7 +191,7 @@ $(function () {
     if (gameId != '') {
       params.yxid = parseInt(gameId);
     }
-    
+
     console.table(params)
     $.post(HTTP_SERVERNAME + '/worksystem/statistical.php', params, function (data, status) {
       var code = data.code;
@@ -231,8 +234,8 @@ $(function () {
           dataTable.forEach((item, index) => {
             htmStr += getTemplate('#dataRow', {
               saleTime: item.dtime,
-              salePrice: item.cmoney,
-              recoveryPrice: item.smoney,
+              salePrice: item.cmoney + '元',
+              recoveryPrice: item.smoney + '元',
               profit: item.bf_lr + '%',
               cost: item.bf_cost + '%'
             });
@@ -243,7 +246,7 @@ $(function () {
     }, 'json');
   }
 
-  function emptyData(){
+  function emptyData() {
     lineOption.xAxis.data = [];
     lineOption.series[0].data = [];
     lineOption.series[1].data = [];
@@ -251,7 +254,7 @@ $(function () {
 
     pieOption.series[0].data = [];
     chartPie.setOption(pieOption);
-  
+
     $('.chapter .data tbody').empty();
   }
 });

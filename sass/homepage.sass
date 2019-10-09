@@ -49,10 +49,19 @@ article
           display: flex
           .typelist
             flex: 0 0 412px
+            margin-right: 40px
             display: flex
             flex-wrap: wrap
             justify-content: space-around
             padding: 52px 0 0 0
+            @include after(10)
+            &::after
+              bottom: 0
+              transform: translateY(100%)
+              left: 0
+              width: 100%
+              border-bottom: 9px solid rgb(54, 187, 181)
+              border-radius: 0 0 7px 7px
             .type
               flex: 0 0 160px
               width: 160px
@@ -62,21 +71,30 @@ article
               border-radius: 10px
               padding-top: 22px
               text-align: center
-              position: relative
-              @include after(10)
-              @include before(20)
-              &::after
-                width: 40px
-                height: 40px
-                top: 0
-                left: 4px
-                transform: translateY(-50%)
-                border-radius: 50%
+              .cap
+                color: #333
+                font-size: 16px
+                margin-bottom: 18px
+              &.iconz
+                @include after(10)
+                &::after
+                  top: 0
+                  left: 4px
+                  width: 40px
+                  height: 40px
+                  transform: translateY(-50%)
+                  border-radius: 50%
+                &::before
+                  position: absolute
+                  top: 0
+                  font-size: 20px
+                  transform: translateY(-50%)
+                  color: #fff
+                  left: 14px
+                  z-index: 20
               &:nth-child(1)
                 &::after
                   background: #fe9395
-                &::before
-                  // 未写完
               &:nth-child(2)
                 &::after
                   background: #36bbb5
@@ -85,14 +103,17 @@ article
                   background: #fbbb6e
               &:nth-child(4)
                 &::after
-                  background: #ec92e0
-              .cap
-                color: #333
-                font-size: 16px
-                margin-bottom: 18px
-              .number
+                  background: #ec92e0  
           .details
             flex: 1
+            @include after(10)
+            &::after
+              bottom: 0
+              transform: translateY(100%)
+              left: 0
+              width: 100%
+              border-bottom: 9px solid rgb(54, 187, 181)
+              border-radius: 0 0 7px 7px
             .chart
               width: 100%
               height: 360px
