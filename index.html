@@ -52,6 +52,7 @@
 <script src="./js/jquery.cookie.min.js"></script>
 <script src="./js/util.js"></script>
 <script src="./js/common.js"></script>
+<script src="./js/md5.min.js"></script>
 <script type="text/javascript">
   $(function () {
     // 读取账号和密码
@@ -86,8 +87,21 @@
         alert('请输入密码！');
         return false;
       }
-      var queryParam = $('.user-infos').serializeArray();
-      $.post(HTTP_SERVERNAME + '/worksystem/main.php', queryParam, function (data, status) {
+
+      // md5加密生成签名
+      var params = $('.user-infos').serializeArray();
+      // params.sort(function (a, b) {
+
+      // });
+      // console.log();
+
+      // var newParams = params.map(function (item, index) {
+      //   return {
+      //     name: item.name,
+      //     value: md5(item.value)
+      //   }
+      // });
+      $.post(HTTP_SERVERNAME + '/worksystem/main.php', params, function (data, status) {
         if (data.code == 0) {
           saveToLocal('user_name', $.trim($('#name').val()));
           if (!$('#remember').is(':checked')) {
@@ -122,5 +136,3 @@
 
   });
 </script>
-
-</html>

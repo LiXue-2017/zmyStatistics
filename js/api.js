@@ -33,9 +33,9 @@ function getGameList(token, typeInt, listDom, callback1, callback2) {
       } else {
         resetSelect(listDom, '', '');
         listDom.empty();
-        callback2();  
+        callback2();
       }
-      
+
     }
   }, 'json');
 }
@@ -93,3 +93,75 @@ function getDealkF(token, listDom, hasAll) {
     }
   }, 'json');
 }
+
+
+// 获取库存数量
+function getInventory(dataObj, callbackS) {
+  var params = {
+    a: 'index'
+  }
+  Object.assign(params, dataObj);
+
+  $.post(HTTP_SERVERNAME2 + '/worksystem/statistical.php', params, function (data) {
+    checkToken(data.code)
+    if (data.code == 0) {
+      callbackS(data.param, params.a);
+    } else {
+      alert(data.msg);
+    }
+  }, 'json');
+}
+
+// 获取上下架情况
+function getShelf(dataObj, callbackS) {
+  var params = {
+    a: 'data_shelf'
+  }
+  Object.assign(params, dataObj);
+
+  $.post(HTTP_SERVERNAME2 + '/worksystem/statistical.php', params, function (data) {
+    checkToken(data.code)
+    if (data.code == 0) {
+      callbackS(data.param, params.a);
+    } else {
+      alert(data.msg);
+    }
+  }, 'json');
+}
+
+// 获取人效情况
+function getPersonEfficiency(dataObj, callbackS) {
+  var params = {
+    a: 'data_user'
+  }
+  Object.assign(params, dataObj);
+  
+  $.post(HTTP_SERVERNAME2 + '/worksystem/statistical.php', params, function (data) {
+    checkToken(data.code)
+    if (data.code == 0) {
+      callbackS(data.param, params.a);
+    } else {
+      alert(data.msg);
+    }
+  }, 'json');
+}
+
+// 获取库存风险情况
+function getInventoryRisk(dataObj, callbackS) {
+  var params = {
+    a: 'data_zhui'
+  }
+  Object.assign(params, dataObj);
+
+  $.post(HTTP_SERVERNAME2 + '/worksystem/statistical.php', params, function (data) {
+    checkToken(data.code)
+    if (data.code == 0) {
+      callbackS(data.param, params.a);
+    } else {
+      alert(data.msg);
+    }
+
+  }, 'json');
+
+  
+};

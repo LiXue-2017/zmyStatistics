@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../css/common.css" />
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/dcalendar.picker.css" />
+  <style>
+    th, td {
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <article>
+    <section class="overview">
+      <br>
+      <table class="kc">
+        <thead>
+          <th>库存数量情况</th>
+          <th>总数</th>
+          <th>金额</th>
+          <th>百分比</th>
+        </thead>
+        <tbody>
+          <tr class="all">
+            <td>当前总库存</td>
+            <td class="num"></td>
+            <td class="money"></td>
+            <td class="avg"></td>
+          </tr>
+          <tr class="hs">
+            <td>今日回收（入库）</td>
+            <td class="num"></td>
+            <td class="money"></td>
+            <td class="avg"></td>
+          </tr>
+          <tr class="cs">
+            <td>今日销售（出库）</td>
+            <td class="num"></td>
+            <td class="money"></td>
+            <td class="avg"></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table class="shelf">
+        <thead>
+          <th>上下架情况</th>
+          <th>总数</th>
+          <th>金额</th>
+          <th>百分比</th>
+        </thead>
+        <tbody>
+          <tr class="all">
+            <td>当前合计待售</td>
+            <td class="num"></td>
+            <td class="money"></td>
+            <td class="avg"></td>
+          </tr>
+          <tr class="">
+            <td>今日上架</td>
+            <td class="num"></td>
+            <td class="money"></td>
+            <td class="avg"></td>
+          </tr>
+          <tr>
+            <td>今日下架</td>
+            <td class="num"></td>
+            <td class="money"></td>
+            <td class="avg"></td>
+          </tr>
+          <tr>
+            <td>今日未上架</td>
+            <td class="num"></td>
+            <td class="money"></td>
+            <td class="avg"></td>
+          </tr>
+          <tr>
+            <td>合计未上架</td>
+            <td class="num"></td>
+            <td class="money"></td>
+            <td class="avg"></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table class="user">
+        <thead>
+          <th>人效情况</th>
+          <th>总数</th>
+          <th>金额</th>
+          <th>百分比</th>
+        </thead>
+        <tbody>
+          <tr class="all">
+            <td>本月截止今日人均回收</td>
+            <td class="num"></td>
+            <td class="money"></td>
+            <td class="avg"></td>
+          </tr>
+          <tr class="">
+            <td>本月截止今日最多回收(数量)</td>
+            <td class="num"></td>
+            <td class="money"></td>
+            <td class="avg"></td>
+          </tr>
+          <tr>
+            <td>本月截止今日最多回收(金额)</td>
+            <td class="num"></td>
+            <td class="money"></td>
+            <td class="avg"></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table class="user">
+        <thead>
+          <th>库存风险情况</th>
+          <th>总数</th>
+          <th>金额</th>
+          <th>百分比</th>
+        </thead>
+        <tbody>
+          <tr class="all">
+            <td>当前合计待追回</td>
+            <td class="num"></td>
+            <td class="money"></td>
+            <td class="avg"></td>
+          </tr>
+          <tr class="">
+            <td>今日追回</td>
+            <td class="num"></td>
+            <td class="money"></td>
+            <td class="avg"></td>
+          </tr>
+          <tr>
+            <td>今日被找回</td>
+            <td class="num"></td>
+            <td class="money"></td>
+            <td class="avg"></td>
+          </tr>
+          <tr class="">
+            <td>当前合计确认丢失</td>
+            <td class="num"></td>
+            <td class="money"></td>
+            <td class="avg"></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="capital">
+    </section>
+  </article>
+
+  <script src="../js/jquery-2.x-git.min.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/util.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/dcalendar.picker.js"></script>
+  <script src="../js/new.js"></script>
+</body>
+
+</html>

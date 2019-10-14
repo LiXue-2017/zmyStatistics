@@ -1,6 +1,6 @@
 {
   "name": "statistics",
-  "main": "index.html",
+  "main": "./statistics/new.html",
   "window": {
     "width": 1920,
     "height": 1080,
@@ -14,5 +14,6 @@
   "version": "1.0.0",
   "description": "逐梦游-统计端",
   "author": "xueli",
-  "license": "ISC"
+  "license": "ISC",
+  "homepage": "http://www.zhumengyou.com"
 }
