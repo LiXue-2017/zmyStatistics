@@ -88,19 +88,8 @@
         return false;
       }
 
-      // md5加密生成签名
       var params = $('.user-infos').serializeArray();
-      // params.sort(function (a, b) {
-
-      // });
-      // console.log();
-
-      // var newParams = params.map(function (item, index) {
-      //   return {
-      //     name: item.name,
-      //     value: md5(item.value)
-      //   }
-      // });
+      
       $.post(HTTP_SERVERNAME + '/worksystem/main.php', params, function (data, status) {
         if (data.code == 0) {
           saveToLocal('user_name', $.trim($('#name').val()));

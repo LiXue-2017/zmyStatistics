@@ -1,13 +1,13 @@
 {
   "name": "statistics",
-  "main": "./statistics/new.html",
+  "main": "index.html",
   "window": {
     "width": 1920,
     "height": 1080,
     "min_width": 1440,
     "min_height": 900,
     "position": "center",
-    "icon": "assets/logo.png",
+    "icon": "assets/zmy-icon.png",
     "title": "逐梦游-统计端",
     "toolbar": true
   },

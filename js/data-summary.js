@@ -6,9 +6,16 @@ $(function () {
     TIME_QUARTER = 3, // 时间 季度
     TIME_YEAR = 4; // 时间 年
 
-
   var token = loadFromLocal('token', 'error');
-  var user = loadFromLocal('user_name', 'error');
+  // var user = loadFromLocal('user_name', 'error');
+
+  // 加载页面左侧和头部菜单
+  $('.menu-left-box').load('_menus-left.html', function () {
+    $(this).find('.menus-left .item.data-statistics').addClass('current');
+  });
+  $('.main .menu-top-box').load('_menus-top.html', function () {
+    $(this).find('.menus-left .item.data-statistics').addClass('current');
+  });
 
   // 初始化时间选择器
   $('#sDate').dcalendarpicker();
