@@ -7,14 +7,15 @@ $(function () {
     TIME_YEAR = 4; // 时间 年
 
   var token = loadFromLocal('token', 'error');
-  // var user = loadFromLocal('user_name', 'error');
+  var user = loadFromLocal('user_name', 'error');
 
   // 加载页面左侧和头部菜单
   $('.menu-left-box').load('_menus-left.html', function () {
     $(this).find('.menus-left .item.data-statistics').addClass('current');
   });
-  $('.main .menu-top-box').load('_menus-top.html', function () {
-    $(this).find('.menus-left .item.data-statistics').addClass('current');
+  $('.main .menu-top-box').load('_menus-top2.html', function () {
+    $(this).find('.menus-top .data-statistics').addClass('current');
+    $(this).find('.user-name .txt').text(user);
   });
 
   // 初始化时间选择器
@@ -34,20 +35,35 @@ $(function () {
   getInventoryRisk(getParams(TIME_DAY), showOverview);
 
   // 点击 日、天、月、季、年
-  // $('').click(function () {
-  // getInventory(getParams(TIME_DAY), showOverview);
-  // getShelf(getParams(TIME_DAY), showOverview);
-  // getPersonEfficiency(getParams(TIME_DAY), showOverview);
-  // getInventoryRisk(getParams(TIME_DAY), showOverview);
+  $('.search input[name=btn-time]').click(function () {
+    $(this).addClass('current').parent().siblings('.btn-box').children().removeClass('current');
 
-  // 自定义
-  // if ($(this).attr('data-value') == TIME_CUSTOM) {
-  //   // 时间选择器 显示
-  //   $('').show();
-  // } else {
-  //   $('').hide();
-  // }
-  // });
+    // 自定义
+    if ($(this).attr('data-value') == TIME_CUSTOM) {
+      // 时间选择器 显示
+      $('.search .time').css({
+        'visibility': 'visible'
+      });
+      return;
+    } else {
+      $('.search .time').css({
+        'visibility': 'hidden'
+      });
+    }
+
+    var timeInt = parseInt($(this).attr('data-value'));
+    getInventory(getParams(timeInt), showOverview);
+    getShelf(getParams(timeInt), showOverview);
+    getPersonEfficiency(getParams(timeInt), showOverview);
+    getInventoryRisk(getParams(timeInt), showOverview);
+  });
+  // 选择时间范围
+  $('#sDate, #eDate').change(function () {
+    getInventory(getParams(TIME_CUSTOM), showOverview);
+    getShelf(getParams(TIME_CUSTOM), showOverview);
+    getPersonEfficiency(getParams(TIME_CUSTOM), showOverview);
+    getInventoryRisk(getParams(TIME_CUSTOM), showOverview);
+  });
 
   // 返回 今日数据概览 接口参数
   function getParams(timeInt) {
@@ -78,76 +94,76 @@ $(function () {
       if (typeStr == 'index') {
         console.log('showOverview');
         console.table(data);
-
         // 总
-        $('.overview table.kc tbody tr.all td.num').text(data.all.num);
-        $('.overview table.kc tbody tr.all td.money').text(data.all.money);
-        $('.overview table.kc tbody tr.all td.avg').text(data.all.avg);
-        // 出售
-        $('.overview table.kc tbody tr.cs td.num').text(data.cs.num);
-        $('.overview table.kc tbody tr.cs td.money').text(data.cs.money);
-        $('.overview table.kc tbody tr.cs td.avg').text(data.cs.avg);
+        $('.sec.inventory tr.all .num').text(data.all.num+'个');
+        $('.sec.inventory tr.all .money').text('￥' + data.all.money);
+        $('.sec.inventory tr.all .pct').text(data.all.avg);
+
         // 回收
-        $('.overview table.kc tbody tr.hs td.num').text(data.hs.num);
-        $('.overview table.kc tbody tr.hs td.money').text(data.hs.money);
-        $('.overview table.kc tbody tr.hs td.avg').text(data.hs.avg);
+        $('.sec.inventory tr.recovery .num').text(data.hs.num+'个');
+        $('.sec.inventory tr.recovery .money').text('￥' + data.hs.money);
+        $('.sec.inventory tr.recovery .pct').text(data.hs.avg);
+        // 出售
+        $('.sec.inventory tr.sale .num').text(data.cs.num+'个');
+        $('.sec.inventory tr.sale .money').text('￥' + data.cs.money);
+        $('.sec.inventory tr.sale .pct').text(data.cs.avg);
       }
       // 上下架情况
       if (typeStr == 'data_shelf') {
         console.table(data);
         // 合计待售
-        $('.overview table.shelf tbody tr:nth-child(1) td.num').text(data.ds.num);
-        $('.overview table.shelf tbody tr:nth-child(1) td.money').text(data.ds.money);
-        $('.overview table.shelf tbody tr:nth-child(1) td.avg').text(data.ds.avg);
+        $('.sec.shelf .list .to-sale .num').text(data.ds.num+'个');
+        $('.sec.shelf .list .to-sale .amount').text('￥' + data.ds.money);
+        $('.sec.shelf .list .to-sale .pct').text(data.ds.avg);
         // 今日上架
-        $('.overview table.shelf tbody tr:nth-child(2) td.num').text(data.sj.num);
-        $('.overview table.shelf tbody tr:nth-child(2) td.money').text(data.sj.money);
-        $('.overview table.shelf tbody tr:nth-child(2) td.avg').text(data.sj.avg);
+        $('.sec.shelf .list .day-shelf .num').text(data.sj.num+'个');
+        $('.sec.shelf .list .day-shelf .amount').text('￥' + data.sj.money);
+        $('.sec.shelf .list .day-shelf .pct').text(data.sj.avg);
         // 今日下架
-        $('.overview table.shelf tbody tr:nth-child(3) td.num').text(data.xj.num);
-        $('.overview table.shelf tbody tr:nth-child(3) td.money').text(data.xj.money);
-        $('.overview table.shelf tbody tr:nth-child(3) td.avg').text(data.xj.avg);
+        $('.sec.shelf .list .day-rm .num').text(data.xj.num+'个');
+        $('.sec.shelf .list .day-rm .amount').text('￥' + data.xj.money);
+        $('.sec.shelf .list .day-rm .pct').text(data.xj.avg);
         // 今日未上架
-        $('.overview table.shelf tbody tr:nth-child(4) td.num').text(data.ws.num);
-        $('.overview table.shelf tbody tr:nth-child(4) td.money').text(data.ws.money);
-        $('.overview table.shelf tbody tr:nth-child(4) td.avg').text(data.ws.avg);
+        $('.sec.shelf .list .day-nshelf .num').text(data.ws.num+'个');
+        $('.sec.shelf .list .day-nshelf .amount').text('￥' + data.ws.money);
+        $('.sec.shelf .list .day-nshelf .pct').text(data.ws.avg);
         // 合计未上架
-        $('.overview table.shelf tbody tr:nth-child(5) td.num').text(data.wsz.num);
-        $('.overview table.shelf tbody tr:nth-child(5) td.money').text(data.ws.money);
-        $('.overview table.shelf tbody tr:nth-child(5) td.avg').text(data.ws.avg);
+        $('.sec.shelf .list .all-nshelf .num').text(data.wsz.num+'个');
+        $('.sec.shelf .list .all-nshelf .amount').text('￥' + data.ws.money);
+        $('.sec.shelf .list .all-nshelf .pct').text(data.ws.avg);
       }
-      
+
       // 人效情况
       if (typeStr == 'data_user') {
         console.table(data);
         // 人均回收
-        $('.overview table.user tbody tr:nth-child(1) td.num').text(data.avg_z.num);
-        $('.overview table.user tbody tr:nth-child(1) td.num').text(data.avg_z.money);
-        $('.overview table.user tbody tr:nth-child(1) td.num').text(data.avg_z.avg);
+        $('.sec .people .avg .name').text(data.avg_z.num+'个');
+        $('.sec .people .avg .money').text('￥' + data.avg_z.money);
+        $('.sec .people .avg .percent').text(data.avg_z.avg);
         // 今日最多回收(数量)
-        $('.overview table.user tbody tr:nth-child(2) td.num').text(data.num_one.num);
-        $('.overview table.user tbody tr:nth-child(2) td.num').text(data.num_one.money);
-        $('.overview table.user tbody tr:nth-child(2) td.num').text(data.num_one.avg);
+        $('.sec .people .max-num .name').text(data.num_one.username);
+        $('.sec .people .max-num .top-num').text(data.num_one.num+'个');
+        $('.sec .people .max-num .money').text('￥' + data.num_one.money);
         // 今日最多回收(金额)
-        $('.overview table.user tbody tr:nth-child(2) td.num').text(data.money_one.num);
-        $('.overview table.user tbody tr.hs td.num').text(data.money_one.money);
-        $('.overview table.user tbody tr.hs td.num').text(data.money_one.avg);
+        $('.sec .people .max-money .name').text(data.money_one.username);
+        $('.sec .people .max-money .top-num').text(data.money_one.num+'个');
+        $('.sec .people .max-money .money').text('￥' + data.money_one.money);
       }
       // 库存风险情况
       if (typeStr == 'data_zhui') {
         console.table(data);
         // 合计待追回
-        $('.overview table.kc tbody tr.hs td.num').text(data.avg_z.num);
-        $('.overview table.kc tbody tr.hs td.num').text(data.avg_z.money);
-        $('.overview table.kc tbody tr.hs td.num').text(data.avg_z.avg);
+        $('.sec.risk .data .tobe-re .num').text(data.avg_z.num+'个');
+        $('.sec.risk .data .tobe-re .amount').text('￥' + data.avg_z.money);
+        $('.sec.risk .data .tobe-re .pct').text(data.avg_z.avg);
         // 今日已追回
-        $('.overview table.kc tbody tr.hs td.num').text(data.zhui.num);
-        $('.overview table.kc tbody tr.hs td.num').text(data.zhui.money);
-        $('.overview table.kc tbody tr.hs td.num').text(data.zhui.avg);
+        $('.sec.risk .data .day-re .num').text(data.zhui.num+'个');
+        $('.sec.risk .data .day-re .amount').text('￥' + data.zhui.money);
+        $('.sec.risk .data .day-re .pct').text(data.zhui.avg);
         // 今日被找回
-        $('.overview table.kc tbody tr.hs td.num').text(data.zhao.num);
-        $('.overview table.kc tbody tr.hs td.num').text(data.zhao.money);
-        $('.overview table.kc tbody tr.hs td.num').text(data.zhao.avg);
+        $('.sec.risk .data .day-back .num').text(data.zhao.num+'个');
+        $('.sec.risk .data .day-back .amount').text('￥' + data.zhao.money);
+        $('.sec.risk .data .day-back .pct').text(data.zhao.avg);
       }
 
     }

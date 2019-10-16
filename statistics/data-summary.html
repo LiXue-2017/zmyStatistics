@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../css/common.css" />
   <link rel="stylesheet" href="../css/reset.css" />
   <link rel="stylesheet" href="../css/dcalendar.picker.css" />
+  <link rel="stylesheet" href="../css/icon-font.css" />
   <link rel="stylesheet" href="../css/data-summary.css">
 </head>
 
@@ -15,146 +16,274 @@
     <section class="menu-left-box"></section>
     <section class="main">
       <section class="menu-top-box"></section>
-      <section class="content"></section>
+      <section class="content">
+        <!-- 搜索条件 -->
+        <div class="search">
+          <div class="btn-box">
+            <input class="current" type="button" name="btn-time" data-value="0" value="按日" />
+          </div>
+          <div class="btn-box">
+            <input type="button" name="btn-time" data-value="1" value="按周" />
+          </div>
+          <div class="btn-box">
+            <input type="button" name="btn-time" data-value="2" value="按月" />
+          </div>
+          <div class="btn-box">
+            <input type="button" name="btn-time" data-value="3" value="按季" />
+          </div>
+          <div class="btn-box">
+            <input type="button" name="btn-time" data-value="4" value="按年" />
+          </div>
+          <div class="btn-box">
+            <input type="button" name="btn-time" data-value="5" value="自定义" />
+          </div>
+          <div class="time">
+            <span class="cap">时间范围：</span>
+            <div class="time-box ilbk">
+              <input id="sDate" type="text" name="stime" /><span class="ilbk icon-to">~</span><input id="eDate"
+                type="text" name="etime" />
+            </div>
+          </div>
+        </div>
+        <!-- 第一栏 -->
+        <div class="flex-box">
+          <div class="sec">
+            <ul class="money">
+              <li class="type">
+                <div class="percent">
+                  <i class="iconz icon-triangle-up"></i>
+                  <span class="txt">10%</span>
+                </div>
+                <p class="num">￥133333</p>
+                <p class="cap">今日入账</p>
+              </li>
+              <li class="type">
+                <div class="percent">
+                  <i class="iconz icon-triangle-up"></i>
+                  <span class="txt">10%</span>
+                </div>
+                <p class="num">￥133333</p>
+                <p class="cap">今日入账</p>
+              </li>
+              <li class="type">
+                <div class="percent">
+                  <i class="iconz icon-triangle-up"></i>
+                  <span class="txt">10%</span>
+                </div>
+                <p class="num">￥133333</p>
+                <p class="cap">今日入账</p>
+              </li>
+            </ul>
+            <!-- 人效 -->
+            <div class="people">
+              <h3 class="title">人效情况</h3>
+              <ul class="list">
+                <li class="item avg">
+                  <div class="top clearfix">
+                    <span class="name left">0个</span>
+                    <div class="right nums">
+                      <p class="top-num">
+                        <i class="iconz icon-triangle-up"></i>
+                        <span class="percent">0</span>
+                      </p>
+                      <p class="money" class="money">￥0</p>
+                    </div>
+                  </div>
+                  <p class="txt">本月截止今日人均回收</p>
+                </li>
+                <li class="item max-num">
+                  <div class="top clearfix">
+                    <span class="name left">0个</span>
+                    <div class="right nums">
+                      <p class="top-num">0个</p>
+                      <p class="money">￥0</p>
+                    </div>
+                  </div>
+                  <p class="txt">本月截止今日最多回收<span class="cr11">(数量)</span></p>
+                </li>
+                <li class="item max-money">
+                  <div class="top clearfix">
+                    <span class="name left">0个</span>
+                    <div class="right nums">
+                      <p class="top-num">0个</p>
+                      <p class="money">￥0</p>
+                    </div>
+                  </div>
+                  <p class="txt">本月截止今日最多回收<span class="cr11">(金额)</span></p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sec shelf">
+            <h3 class="title">上下架情况</h3>
+            <ul class="list clearfix">
+              <li class="item to-sale">
+                <p class="top clearfix">
+                  <span class="num">0个</span>
+                  <span class="amount">0</span>
+                </p>
+                <p class="btm up">
+                  <span class="txt">当前合计代售</span>
+                  <i class="iconz icon-triangle-up"></i>
+                  <span class="pct">0</span>
+                </p>
+              </li>
+              <li class="item day-shelf">
+                <p class="top clearfix">
+                  <span class="num">0个</span>
+                  <span class="amount">0</span>
+                </p>
+                <p class="btm up">
+                  <span class="txt">今日上架</span>
+                  <i class="iconz icon-triangle-up"></i>
+                  <span class="pct">0</span>
+                </p>
+              </li>
+              <li class="item day-rm">
+                <p class="top clearfix">
+                  <span class="num">0个</span>
+                  <span class="amount">0</span>
+                </p>
+                <p class="btm up">
+                  <span class="txt">今日下架</span>
+                  <i class="iconz icon-triangle-up"></i>
+                  <span class="pct">0</span>
+                </p>
+              </li>
+              <li class="item day-nshelf">
+                <p class="top clearfix">
+                  <span class="num">0个</span>
+                  <span class="amount">0</span>
+                </p>
+                <p class="btm down">
+                  <span class="txt">今日未上架</span>
+                  <i class="iconz icon-triangle-down"></i>
+                  <span class="pct">0</span>
+                </p>
+              </li>
+              <li class="item all-nshelf">
+                <p class="top clearfix">
+                  <span class="num">0个</span>
+                  <span class="amount">0</span>
+                </p>
+                <p class="btm">
+                  <span class="txt">合计未上架</span>
+                  <i class="iconz icon-triangle-up"></i>
+                  <span class="pct">0</span>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- 第二栏 -->
+        <div class="flex-box">
+          <div class="sec inventory">
+            <h3 class="title">库存数量情况</h3>
+            <table class="data">
+              <thead>
+                <tr>
+                  <th>类别</th>
+                  <th>数量</th>
+                  <th>金额</th>
+                  <th>环比全年平均</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="all">
+                  <td>当前总库存</td>
+                  <td class="num">0个</td>
+                  <td class="amount">￥0</td>
+                  <td class="up pct">
+                    <i class="iconz icon-triangle-up"></i>
+                    <span class="pct">0</span>
+                  </td>
+                </tr>
+                <tr class="recovery">
+                  <td>今日回收(入库)</td>
+                  <td class="num">0个</td>
+                  <td class="amount">￥0</td>
+                  <td class="down pct">
+                    <i class="iconz icon-triangle-down"></i>
+                    <span class="pct">0</span>
+                  </td>
+                </tr>
+                <tr class="sale">
+                  <td>今日销售(出库)</td>
+                  <td class="num">0个</td>
+                  <td class="amount">￥0</td>
+                  <td class="up pct">
+                    <i class="iconz icon-triangle-up"></i>
+                    <span class="pct">0</span>
+                  </td>
+                </tr>
+                <tr class="turnover">
+                  <td>周转率</td>
+                  <td>0</td>
+                  <td>￥0</td>
+                  <td class="up pct">
+                    <i class="iconz icon-triangle-up"></i>
+                    <span class="pct">0</span>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="sec risk">
+            <h3 class="title">库存风险情况</h3>
+            <table class="data">
+              <thead>
+                <tr>
+                  <th>类别</th>
+                  <th>数量</th>
+                  <th>金额</th>
+                  <th>环比全年平均</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="tobe-re">
+                  <td>当前合计待追回</td>
+                  <td class="num">0个</td>
+                  <td class="amount">￥0</td>
+                  <td class="up">
+                    <i class="iconz icon-triangle-up"></i>
+                    <span class="pct">0</span>
+                  </td>
+                </tr>
+                <tr class="day-re">
+                  <td>今日追回</td>
+                  <td class="num">0个</td>
+                  <td class="amount">￥0</td>
+                  <td class="down">
+                    <i class="iconz icon-triangle-down"></i>
+                    <span class="pct">0</span>
+                  </td>
+                </tr>
+                <tr class="day-back">
+                  <td>今日被找回</td>
+                  <td class="num">0个</td>
+                  <td class="amount">￥0</td>
+                  <td class="up">
+                    <i class="iconz icon-triangle-up"></i>
+                    <span class="pct">0</span>
+                  </td>
+                </tr>
+                <tr class="lose">
+                  <td>当前合计确认丢失</td>
+                  <td class="num">0个</td>
+                  <td class="amount">￥0</td>
+                  <td class="up">
+                    <i class="iconz icon-triangle-up"></i>
+                    <span class="pct">0</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
     </section>
-    <!-- <section class="overview">
-      <br>
-      <table class="kc">
-        <thead>
-          <th>库存数量情况</th>
-          <th>总数</th>
-          <th>金额</th>
-          <th>百分比</th>
-        </thead>
-        <tbody>
-          <tr class="all">
-            <td>当前总库存</td>
-            <td class="num"></td>
-            <td class="money"></td>
-            <td class="avg"></td>
-          </tr>
-          <tr class="hs">
-            <td>今日回收（入库）</td>
-            <td class="num"></td>
-            <td class="money"></td>
-            <td class="avg"></td>
-          </tr>
-          <tr class="cs">
-            <td>今日销售（出库）</td>
-            <td class="num"></td>
-            <td class="money"></td>
-            <td class="avg"></td>
-          </tr>
-        </tbody>
-      </table>
-      <br>
-      <table class="shelf">
-        <thead>
-          <th>上下架情况</th>
-          <th>总数</th>
-          <th>金额</th>
-          <th>百分比</th>
-        </thead>
-        <tbody>
-          <tr class="all">
-            <td>当前合计待售</td>
-            <td class="num"></td>
-            <td class="money"></td>
-            <td class="avg"></td>
-          </tr>
-          <tr class="">
-            <td>今日上架</td>
-            <td class="num"></td>
-            <td class="money"></td>
-            <td class="avg"></td>
-          </tr>
-          <tr>
-            <td>今日下架</td>
-            <td class="num"></td>
-            <td class="money"></td>
-            <td class="avg"></td>
-          </tr>
-          <tr>
-            <td>今日未上架</td>
-            <td class="num"></td>
-            <td class="money"></td>
-            <td class="avg"></td>
-          </tr>
-          <tr>
-            <td>合计未上架</td>
-            <td class="num"></td>
-            <td class="money"></td>
-            <td class="avg"></td>
-          </tr>
-        </tbody>
-      </table>
-      <br>
-      <table class="user">
-        <thead>
-          <th>人效情况</th>
-          <th>总数</th>
-          <th>金额</th>
-          <th>百分比</th>
-        </thead>
-        <tbody>
-          <tr class="all">
-            <td>本月截止今日人均回收</td>
-            <td class="num"></td>
-            <td class="money"></td>
-            <td class="avg"></td>
-          </tr>
-          <tr class="">
-            <td>本月截止今日最多回收(数量)</td>
-            <td class="num"></td>
-            <td class="money"></td>
-            <td class="avg"></td>
-          </tr>
-          <tr>
-            <td>本月截止今日最多回收(金额)</td>
-            <td class="num"></td>
-            <td class="money"></td>
-            <td class="avg"></td>
-          </tr>
-        </tbody>
-      </table>
-      <br>
-      <table class="user">
-        <thead>
-          <th>库存风险情况</th>
-          <th>总数</th>
-          <th>金额</th>
-          <th>百分比</th>
-        </thead>
-        <tbody>
-          <tr class="all">
-            <td>当前合计待追回</td>
-            <td class="num"></td>
-            <td class="money"></td>
-            <td class="avg"></td>
-          </tr>
-          <tr class="">
-            <td>今日追回</td>
-            <td class="num"></td>
-            <td class="money"></td>
-            <td class="avg"></td>
-          </tr>
-          <tr>
-            <td>今日被找回</td>
-            <td class="num"></td>
-            <td class="money"></td>
-            <td class="avg"></td>
-          </tr>
-          <tr class="">
-            <td>当前合计确认丢失</td>
-            <td class="num"></td>
-            <td class="money"></td>
-            <td class="avg"></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-    <section class="capital">
-    </section> -->
+
   </article>
 
   <script src="../js/jquery-2.x-git.min.js"></script>

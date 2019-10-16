@@ -1,12 +1,200 @@
 
+@import './_mixin'
+
 article
   display: flex
   color: #333
   .menu-left-box
-    flex: 0 0 300px
-    background: #2B3654
     @import './_menus-left'
   .main  
     flex: 1
+    background: rgba(245,244,251,1)
     .menu-top-box
+      margin-bottom: 30px
       @import './_menus-top2'
+    .content
+      padding: 0 30px
+      .search
+        display: flex
+        justify-content: flex-end
+        padding-right: 120px
+        margin-bottom: 38px
+        .btn-box
+          margin-right: 20px
+          input
+            width: 60px
+            height: 34px
+            line-height: 34px
+            background: 3C3C3C
+            color: #fff
+            border-radius: 4px
+            font-size: 16px
+            &:hover, &.current
+              background: #1E253C
+        .time  
+          display: flex
+          justify-content: flex-end
+          visibility: hidden
+          .cap
+            line-height: 34px
+          .time-box
+            @include time-box(228px, 34px, #00bfb4)
+      .flex-box   
+        display: flex
+        justify-content: space-between
+        margin-bottom: 30px
+        .sec
+          flex: 0 0 765px
+          width: 765px
+          .title
+            margin-bottom: 32px
+            line-height: 33px
+            font-size: 24px
+          .money
+            display: flex
+            justify-content: space-between
+            margin-bottom: 30px
+            .type
+              width: 236px
+              height: 150px
+              border-radius: 20px
+              box-shadow: 0px 5px 8px 0px rgba(169,206,250,0.3)
+              color: #fff
+              padding: 24px 0 0 32px
+              margin-right: 30px
+              &:last-child
+                margin-right: 0
+              &:hover
+                transition: all 0.2s
+                transform: scale(1.1)  
+              .percent
+                margin-bottom: 8px
+                font-size: 0
+                .iconz
+                  display: inline-block
+                  vertical-align: middle
+                  margin-right: 6px
+                  font-size: 18px
+                .txt
+                  display: inline-block
+                  vertical-align: middle
+                  font-size: 16px
+                  font-weight: 500
+                  color: #fff
+                  line-height: 22px
+              .num
+                font-size: 30px
+                line-height: 42px
+                margin: 0 0 8px -6px
+              .cap
+                font-size: 16px
+                line-height: 22px
+              &:nth-child(1)
+                background: linear-gradient(226deg,rgba(41,162,239,1) 0%,rgba(110,215,214,1) 100%)
+              &:nth-child(2)
+                background: linear-gradient(226deg,rgba(237,122,206,1) 0%,rgba(241,168,195,1) 100%)
+              &:nth-child(3)
+                background: linear-gradient(226deg,rgba(249,181,49,1) 0%,rgba(244,209,107,1) 100%)
+          .people
+            width: 100%
+            background: #fff
+            box-shadow: 0px 5px 8px 0px rgba(169,206,250,0.3)
+            border-radius: 20px
+            padding: 24px 26px 24px 24px
+            .title
+              margin-bottom: 32px
+              line-height: 33px
+              font-size: 24px
+            .list
+              width: 100%
+              display: flex
+              justify-content: space-between
+              .item
+                .top
+                  margin-bottom: 3px
+                  .name
+                    font-size: 30px
+                    line-height: 42px
+                  .nums
+                    .top-num
+                      line-height: 20px
+                      margin-bottom: 5px
+                      text-align: right
+                      font-size: 14px
+                      color: #220000
+                      .iconz, .percent
+                        color: #64B789
+                    .money    
+                      font-size: 14px
+                .txt    
+                  line-height: 22px
+                  font-size: 16px
+                  color: #B2B8C3
+        .shelf
+          width: 100%
+          background: #fff
+          box-shadow: 0px 5px 8px 0px rgba(169,206,250,0.3)
+          border-radius: 20px          
+          padding: 24px
+          .title
+            margin-bottom: 32px
+            line-height: 33px
+            font-size: 24px
+          .list
+            display: flex
+            justify-content: flex-start
+            flex-wrap: wrap
+            .item
+              width: 33%
+              flex: 0 0 33%
+              margin-bottom: 65px
+              text-align: center
+              font-size: 0
+              .top
+                margin-bottom: 8px
+                .num
+                  display: inline-block
+                  margin-right: 22px
+                  line-height: 42px
+                  font-size: 30px
+                .amount
+                  display: inline-block
+                  line-height: 20px
+                  font-size: 14px
+              .btm
+                .txt
+                  padding-right: 6px
+                  line-height: 22px
+                  font-size: 16px
+                  color: #B2B8C3
+                .iconz  
+                  font-size: 14px
+                .pct
+                  line-height: 20px
+                  font-size: 14px
+                &.up
+                  color: #64B789
+                &.down  
+                  color: #DF3030
+        .inventory, .risk
+          background: #fff
+          box-shadow: 0px 5px 8px 0px rgba(169,206,250,0.3)
+          border-radius: 20px
+          padding: 24px 26px 24px 24px
+          .data
+            width: 100%
+            text-align: center
+            font-size: 16px
+            thead
+              tr th
+                padding-bottom: 45px
+                height: 67px
+            tbody    
+              tr td
+                padding-bottom: 24px
+                &.up
+                  color: #64B789
+                &.down
+                  color:  #DF3030 
+                
+

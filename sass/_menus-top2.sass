@@ -1,19 +1,39 @@
 &
-  padding: 0 30px
+  display: flex
+  justify-content: space-between
+  margin: 0 30px 20px
+  padding-top: 19px
   height: 80px
   line-height: 80px
+  border-radius: 0 0 20px 20px
+  background: #fff
   .menus-top
     padding-left: 48px
     .item
       float: left
-      margin-right: 48px
+      padding: 0 24px
+      height: 42px
+      line-height: 42px
+      border-radius: 4px
+      &:hover
+        background: #51C0EF
+        .txt
+          color: #fff
       .txt
         color: #333
         font-size: 22px
-  .user-name    
+  .user-name 
     margin-right: 40px
+    font-size: 0
+    line-height: 42px
     .icon
+      display: inline-block
+      vertical-align: middle
       width: 20px
       height: 22px
       background: url(../../assets/user.png) no-repeat
-    // .txt
+      margin-right: 13px
+    .txt
+      display: inline-block
+      vertical-align: middle
+      font-size: 18px
